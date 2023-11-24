@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.jdbc;
+package jsp_prj11.src.main.webapp.WEB;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -75,7 +75,7 @@ public class DatabaseMetaDataUsingInfoSchema extends DatabaseMetaData {
     }
 
     @Override
-    public java.sql.ResultSet getColumnPrivileges(String catalog, String schema, String table, String columnNamePattern) throws SQLException {
+    public ResultSet getColumnPrivileges(String catalog, String schema, String table, String columnNamePattern) throws SQLException {
         String db = getDatabase(catalog, schema);
 
         db = this.pedantic ? db : StringUtils.unQuoteIdentifier(db, this.quotedId);
@@ -287,7 +287,7 @@ public class DatabaseMetaDataUsingInfoSchema extends DatabaseMetaData {
     }
 
     @Override
-    public java.sql.ResultSet getCrossReference(String primaryCatalog, String primarySchema, String primaryTable, String foreignCatalog, String foreignSchema,
+    public ResultSet getCrossReference(String primaryCatalog, String primarySchema, String primaryTable, String foreignCatalog, String foreignSchema,
             String foreignTable) throws SQLException {
         if (primaryTable == null) {
             throw SQLError.createSQLException(Messages.getString("DatabaseMetaData.2"), MysqlErrorNumbers.SQL_STATE_ILLEGAL_ARGUMENT,
@@ -355,7 +355,7 @@ public class DatabaseMetaDataUsingInfoSchema extends DatabaseMetaData {
     }
 
     @Override
-    public java.sql.ResultSet getExportedKeys(String catalog, String schema, String table) throws SQLException {
+    public ResultSet getExportedKeys(String catalog, String schema, String table) throws SQLException {
         if (table == null) {
             throw SQLError.createSQLException(Messages.getString("DatabaseMetaData.2"), MysqlErrorNumbers.SQL_STATE_ILLEGAL_ARGUMENT,
                     getExceptionInterceptor());
@@ -433,7 +433,7 @@ public class DatabaseMetaDataUsingInfoSchema extends DatabaseMetaData {
     }
 
     @Override
-    public java.sql.ResultSet getImportedKeys(String catalog, String schema, String table) throws SQLException {
+    public ResultSet getImportedKeys(String catalog, String schema, String table) throws SQLException {
         if (table == null) {
             throw SQLError.createSQLException(Messages.getString("DatabaseMetaData.2"), MysqlErrorNumbers.SQL_STATE_ILLEGAL_ARGUMENT,
                     getExceptionInterceptor());
@@ -535,7 +535,7 @@ public class DatabaseMetaDataUsingInfoSchema extends DatabaseMetaData {
     }
 
     @Override
-    public java.sql.ResultSet getPrimaryKeys(String catalog, String schema, String table) throws SQLException {
+    public ResultSet getPrimaryKeys(String catalog, String schema, String table) throws SQLException {
         if (table == null) {
             throw SQLError.createSQLException(Messages.getString("DatabaseMetaData.2"), MysqlErrorNumbers.SQL_STATE_ILLEGAL_ARGUMENT,
                     getExceptionInterceptor());
@@ -1122,7 +1122,7 @@ public class DatabaseMetaDataUsingInfoSchema extends DatabaseMetaData {
     }
 
     @Override
-    public java.sql.ResultSet getFunctions(String catalog, String schemaPattern, String functionNamePattern) throws SQLException {
+    public ResultSet getFunctions(String catalog, String schemaPattern, String functionNamePattern) throws SQLException {
         String db = getDatabase(catalog, schemaPattern);
 
         db = this.pedantic ? db : StringUtils.unQuoteIdentifier(db, this.quotedId);

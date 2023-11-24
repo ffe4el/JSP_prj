@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.jdbc;
+package jsp_prj11.src.main.webapp.WEB;
 
 import static com.mysql.cj.jdbc.DatabaseMetaData.ProcedureType.FUNCTION;
 import static com.mysql.cj.jdbc.DatabaseMetaData.ProcedureType.PROCEDURE;
@@ -218,14 +218,14 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
             // Figure Out the Size
 
             String temp;
-            java.util.StringTokenizer tokenizer;
+            StringTokenizer tokenizer;
             int maxLength = 0;
             int fract;
 
             switch (this.mysqlType) {
                 case ENUM:
                     temp = typeInfo.substring(typeInfo.indexOf("(") + 1, typeInfo.lastIndexOf(")"));
-                    tokenizer = new java.util.StringTokenizer(temp, ",");
+                    tokenizer = new StringTokenizer(temp, ",");
                     while (tokenizer.hasMoreTokens()) {
                         String nextToken = tokenizer.nextToken();
                         maxLength = Math.max(maxLength, nextToken.length() - 2);
@@ -235,7 +235,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
 
                 case SET:
                     temp = typeInfo.substring(typeInfo.indexOf("(") + 1, typeInfo.lastIndexOf(")"));
-                    tokenizer = new java.util.StringTokenizer(temp, ",");
+                    tokenizer = new StringTokenizer(temp, ",");
 
                     int numElements = tokenizer.countTokens();
                     if (numElements > 0) {
@@ -1018,7 +1018,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
      * @throws SQLException
      *             if a database access error occurs
      */
-    public List<Row> extractForeignKeyForTable(ArrayList<Row> rows, java.sql.ResultSet rs, String dbName) throws SQLException {
+    public List<Row> extractForeignKeyForTable(ArrayList<Row> rows, ResultSet rs, String dbName) throws SQLException {
         byte[][] row = new byte[3][];
         row[0] = rs.getBytes(1);
         row[1] = s2b(SUPPORTS_FK);
@@ -1166,8 +1166,8 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
      */
     public ResultSet extractForeignKeyFromCreateTable(String dbName, String tableName) throws SQLException {
         ArrayList<String> tableList = new ArrayList<>();
-        java.sql.ResultSet rs = null;
-        java.sql.Statement stmt = null;
+        ResultSet rs = null;
+        Statement stmt = null;
 
         if (tableName != null) {
             tableList.add(tableName);
@@ -1241,7 +1241,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
     }
 
     @Override
-    public java.sql.ResultSet getAttributes(String arg0, String arg1, String arg2, String arg3) throws SQLException {
+    public ResultSet getAttributes(String arg0, String arg1, String arg2, String arg3) throws SQLException {
         Field[] fields = new Field[21];
         fields[0] = new Field("", "TYPE_CAT", this.metadataCollationIndex, this.metadataEncoding, MysqlType.CHAR, 32);
         fields[1] = new Field("", "TYPE_SCHEM", this.metadataCollationIndex, this.metadataEncoding, MysqlType.CHAR, 32);
@@ -1270,7 +1270,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
     }
 
     @Override
-    public java.sql.ResultSet getBestRowIdentifier(String catalog, String schema, final String table, int scope, boolean nullable) throws SQLException {
+    public ResultSet getBestRowIdentifier(String catalog, String schema, final String table, int scope, boolean nullable) throws SQLException {
         if (table == null) {
             throw SQLError.createSQLException(Messages.getString("DatabaseMetaData.2"), MysqlErrorNumbers.SQL_STATE_ILLEGAL_ARGUMENT,
                     getExceptionInterceptor());
@@ -1336,7 +1336,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
                                      */
                                     if (type.indexOf("enum") != -1) {
                                         String temp = type.substring(type.indexOf("("), type.indexOf(")"));
-                                        java.util.StringTokenizer tokenizer = new java.util.StringTokenizer(temp, ",");
+                                        StringTokenizer tokenizer = new StringTokenizer(temp, ",");
                                         int maxLength = 0;
 
                                         while (tokenizer.hasMoreTokens()) {
@@ -1394,7 +1394,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
             }
         }
 
-        java.sql.ResultSet results = this.resultSetFactory.createFromResultsetRows(ResultSet.CONCUR_READ_ONLY, ResultSet.TYPE_SCROLL_INSENSITIVE,
+        ResultSet results = this.resultSetFactory.createFromResultsetRows(ResultSet.CONCUR_READ_ONLY, ResultSet.TYPE_SCROLL_INSENSITIVE,
                 new ResultsetRowsStatic(rows, new DefaultColumnDefinition(fields)));
 
         return results;
@@ -1408,8 +1408,8 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
      */
     private void getCallStmtParameterTypes(String db, String quotedProcName, ProcedureType procType, String parameterNamePattern, List<Row> resultRows,
             boolean forGetFunctionColumns) throws SQLException {
-        java.sql.Statement paramRetrievalStmt = null;
-        java.sql.ResultSet paramRetrievalRs = null;
+        Statement paramRetrievalStmt = null;
+        ResultSet paramRetrievalRs = null;
 
         String parameterDef = null;
 
@@ -1477,7 +1477,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
             procNameBuf.append(quotedProcName);
 
             String fieldName = null;
-            if (procType == PROCEDURE) {
+            if (procType == ProcedureType.PROCEDURE) {
                 paramRetrievalRs = paramRetrievalStmt.executeQuery("SHOW CREATE PROCEDURE " + procNameBuf.toString());
                 fieldName = "Create Procedure";
             } else {
@@ -1520,7 +1520,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
 
                     endOfParamDeclarationIndex = endPositionOfParameterDeclaration(openParenIndex, procedureDef, this.quotedId);
 
-                    if (procType == FUNCTION) {
+                    if (procType == ProcedureType.FUNCTION) {
 
                         // Grab the return column since it needs
                         // to go first in the output result set
@@ -1879,8 +1879,8 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
      */
     protected List<String> getDatabases(String dbPattern) throws SQLException {
         PreparedStatement pStmt = null;
-        java.sql.ResultSet results = null;
-        java.sql.Statement stmt = null;
+        ResultSet results = null;
+        Statement stmt = null;
 
         try {
             stmt = this.conn.getMetadataSafeStatement();
@@ -1941,7 +1941,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
     }
 
     @Override
-    public java.sql.ResultSet getCatalogs() throws SQLException {
+    public ResultSet getCatalogs() throws SQLException {
         List<String> resultsAsList = this.databaseTerm.getValue() == DatabaseTerm.SCHEMA ? new ArrayList<>() : getDatabases();
 
         Field[] fields = new Field[1];
@@ -1989,7 +1989,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
     }
 
     @Override
-    public java.sql.ResultSet getColumnPrivileges(String catalog, String schema, String table, String columnNamePattern) throws SQLException {
+    public ResultSet getColumnPrivileges(String catalog, String schema, String table, String columnNamePattern) throws SQLException {
         String db = getDatabase(catalog, schema);
 
         StringBuilder grantQueryBuf = new StringBuilder("SELECT c.host, c.db, t.grantor, c.user, c.table_name, c.column_name, c.column_priv");
@@ -2085,7 +2085,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
     }
 
     @Override
-    public java.sql.ResultSet getColumns(final String catalog, final String schemaPattern, final String tableNamePattern, String columnNamePattern)
+    public ResultSet getColumns(final String catalog, final String schemaPattern, final String tableNamePattern, String columnNamePattern)
             throws SQLException {
         String db = getDatabase(catalog, schemaPattern);
 
@@ -2106,7 +2106,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
                 void forEach(String dbStr) throws SQLException {
                     ArrayList<String> tableNameList = new ArrayList<>();
 
-                    java.sql.ResultSet tables = null;
+                    ResultSet tables = null;
 
                     try {
                         tables = dbMapsToSchema ? getTables(null, dbStr, tableNamePattern, new String[0])
@@ -2285,7 +2285,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
             }
         }
 
-        java.sql.ResultSet results = this.resultSetFactory.createFromResultsetRows(ResultSet.CONCUR_READ_ONLY, ResultSet.TYPE_SCROLL_INSENSITIVE,
+        ResultSet results = this.resultSetFactory.createFromResultsetRows(ResultSet.CONCUR_READ_ONLY, ResultSet.TYPE_SCROLL_INSENSITIVE,
                 new ResultsetRowsStatic(rows, new DefaultColumnDefinition(fields)));
 
         return results;
@@ -2328,7 +2328,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
     }
 
     @Override
-    public java.sql.ResultSet getCrossReference(final String primaryCatalog, final String primarySchema, final String primaryTable, final String foreignCatalog,
+    public ResultSet getCrossReference(final String primaryCatalog, final String primarySchema, final String primaryTable, final String foreignCatalog,
             final String foreignSchema, final String foreignTable) throws SQLException {
         if (primaryTable == null) {
             throw SQLError.createSQLException(Messages.getString("DatabaseMetaData.2"), MysqlErrorNumbers.SQL_STATE_ILLEGAL_ARGUMENT,
@@ -2450,7 +2450,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
             }
         }
 
-        java.sql.ResultSet results = this.resultSetFactory.createFromResultsetRows(ResultSet.CONCUR_READ_ONLY, ResultSet.TYPE_SCROLL_INSENSITIVE,
+        ResultSet results = this.resultSetFactory.createFromResultsetRows(ResultSet.CONCUR_READ_ONLY, ResultSet.TYPE_SCROLL_INSENSITIVE,
                 new ResultsetRowsStatic(tuples, new DefaultColumnDefinition(fields)));
 
         return results;
@@ -2516,12 +2516,12 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
     }
 
     @Override
-    public String getDriverVersion() throws java.sql.SQLException {
+    public String getDriverVersion() throws SQLException {
         return Constants.CJ_FULL_NAME + " (Revision: " + Constants.CJ_REVISION + ")";
     }
 
     @Override
-    public java.sql.ResultSet getExportedKeys(String catalog, String schema, final String table) throws SQLException {
+    public ResultSet getExportedKeys(String catalog, String schema, final String table) throws SQLException {
         if (table == null) {
             throw SQLError.createSQLException(Messages.getString("DatabaseMetaData.2"), MysqlErrorNumbers.SQL_STATE_ILLEGAL_ARGUMENT,
                     getExceptionInterceptor());
@@ -2599,7 +2599,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
             }
         }
 
-        java.sql.ResultSet results = this.resultSetFactory.createFromResultsetRows(ResultSet.CONCUR_READ_ONLY, ResultSet.TYPE_SCROLL_INSENSITIVE,
+        ResultSet results = this.resultSetFactory.createFromResultsetRows(ResultSet.CONCUR_READ_ONLY, ResultSet.TYPE_SCROLL_INSENSITIVE,
                 new ResultsetRowsStatic(rows, new DefaultColumnDefinition(fields)));
 
         return results;
@@ -2641,7 +2641,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
     }
 
     @Override
-    public java.sql.ResultSet getImportedKeys(String catalog, String schema, final String table) throws SQLException {
+    public ResultSet getImportedKeys(String catalog, String schema, final String table) throws SQLException {
         if (table == null) {
             throw SQLError.createSQLException(Messages.getString("DatabaseMetaData.2"), MysqlErrorNumbers.SQL_STATE_ILLEGAL_ARGUMENT,
                     getExceptionInterceptor());
@@ -2715,14 +2715,14 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
             }
         }
 
-        java.sql.ResultSet results = this.resultSetFactory.createFromResultsetRows(ResultSet.CONCUR_READ_ONLY, ResultSet.TYPE_SCROLL_INSENSITIVE,
+        ResultSet results = this.resultSetFactory.createFromResultsetRows(ResultSet.CONCUR_READ_ONLY, ResultSet.TYPE_SCROLL_INSENSITIVE,
                 new ResultsetRowsStatic(rows, new DefaultColumnDefinition(fields)));
 
         return results;
     }
 
     @Override
-    public java.sql.ResultSet getIndexInfo(String catalog, String schema, final String table, final boolean unique, boolean approximate) throws SQLException {
+    public ResultSet getIndexInfo(String catalog, String schema, final String table, final boolean unique, boolean approximate) throws SQLException {
         /*
          * MySQL stores index information in the following fields: Table Non_unique Key_name Seq_in_index Column_name Collation Cardinality Sub_part
          */
@@ -2816,7 +2816,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
                 rows.add(sortedRowsIterator.next());
             }
 
-            java.sql.ResultSet indexInfo = this.resultSetFactory.createFromResultsetRows(ResultSet.CONCUR_READ_ONLY, ResultSet.TYPE_SCROLL_INSENSITIVE,
+            ResultSet indexInfo = this.resultSetFactory.createFromResultsetRows(ResultSet.CONCUR_READ_ONLY, ResultSet.TYPE_SCROLL_INSENSITIVE,
                     new ResultsetRowsStatic(rows, new DefaultColumnDefinition(fields)));
 
             return indexInfo;
@@ -2973,7 +2973,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
     }
 
     @Override
-    public java.sql.ResultSet getPrimaryKeys(String catalog, String schema, final String table) throws SQLException {
+    public ResultSet getPrimaryKeys(String catalog, String schema, final String table) throws SQLException {
         if (table == null) {
             throw SQLError.createSQLException(Messages.getString("DatabaseMetaData.2"), MysqlErrorNumbers.SQL_STATE_ILLEGAL_ARGUMENT,
                     getExceptionInterceptor());
@@ -3055,14 +3055,14 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
             }
         }
 
-        java.sql.ResultSet results = this.resultSetFactory.createFromResultsetRows(ResultSet.CONCUR_READ_ONLY, ResultSet.TYPE_SCROLL_INSENSITIVE,
+        ResultSet results = this.resultSetFactory.createFromResultsetRows(ResultSet.CONCUR_READ_ONLY, ResultSet.TYPE_SCROLL_INSENSITIVE,
                 new ResultsetRowsStatic(rows, new DefaultColumnDefinition(getPrimaryKeysFields())));
 
         return results;
     }
 
     @Override
-    public java.sql.ResultSet getProcedureColumns(String catalog, String schemaPattern, String procedureNamePattern, String columnNamePattern)
+    public ResultSet getProcedureColumns(String catalog, String schemaPattern, String procedureNamePattern, String columnNamePattern)
             throws SQLException {
         return getProcedureOrFunctionColumns(createProcedureColumnsFields(), catalog, schemaPattern, procedureNamePattern, columnNamePattern, true,
                 this.conn.getPropertySet().getBooleanProperty(PropertyKey.getProceduresReturnsFunctions).getValue());
@@ -3093,7 +3093,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
         return fields;
     }
 
-    protected java.sql.ResultSet getProcedureOrFunctionColumns(Field[] fields, String catalog, String schemaPattern, String procedureOrFunctionNamePattern,
+    protected ResultSet getProcedureOrFunctionColumns(Field[] fields, String catalog, String schemaPattern, String procedureOrFunctionNamePattern,
             String columnNamePattern, boolean returnProcedures, boolean returnFunctions) throws SQLException {
         String db = getDatabase(catalog, schemaPattern);
         final boolean dbMapsToSchema = DatabaseMetaData.this.databaseTerm.getValue() == DatabaseTerm.SCHEMA;
@@ -3137,7 +3137,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
                 procsOrFuncsToExtractList.add(new ComparableWrapper<>(
                         StringUtils.getFullyQualifiedName(dbMapsToSchema ? procsAndOrFuncsRs.getString(2) : procsAndOrFuncsRs.getString(1),
                                 procsAndOrFuncsRs.getString(3), this.quotedId, this.pedantic),
-                        procsAndOrFuncsRs.getShort(8) == procedureNoResult ? PROCEDURE : FUNCTION));
+                        procsAndOrFuncsRs.getShort(8) == procedureNoResult ? ProcedureType.PROCEDURE : ProcedureType.FUNCTION));
                 hasResults = true;
             }
 
@@ -3202,7 +3202,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
     }
 
     @Override
-    public java.sql.ResultSet getProcedures(String catalog, String schemaPattern, String procedureNamePattern) throws SQLException {
+    public ResultSet getProcedures(String catalog, String schemaPattern, String procedureNamePattern) throws SQLException {
         return getProceduresAndOrFunctions(createFieldMetadataForGetProcedures(), catalog, schemaPattern, procedureNamePattern, true,
                 this.conn.getPropertySet().getBooleanProperty(PropertyKey.getProceduresReturnsFunctions).getValue());
     }
@@ -3239,7 +3239,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
      * @throws SQLException
      *             if a database access error occurs
      */
-    protected java.sql.ResultSet getProceduresAndOrFunctions(final Field[] fields, String catalog, String schemaPattern, final String procedureNamePattern,
+    protected ResultSet getProceduresAndOrFunctions(final Field[] fields, String catalog, String schemaPattern, final String procedureNamePattern,
             final boolean returnProcedures, final boolean returnFunctions) throws SQLException {
         final ArrayList<Row> procedureRows = new ArrayList<>();
 
@@ -3271,7 +3271,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
 
                 selectFromMySQLProcSQL.append(" ORDER BY name, type");
 
-                java.sql.PreparedStatement proceduresStmt = prepareMetaDataSafeStatement(selectFromMySQLProcSQL.toString());
+                PreparedStatement proceduresStmt = prepareMetaDataSafeStatement(selectFromMySQLProcSQL.toString());
 
                 try {
                     /* Try using system tables first, as this is a little bit more efficient.... */
@@ -3448,7 +3448,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
     }
 
     @Override
-    public java.sql.ResultSet getSchemas() throws SQLException {
+    public ResultSet getSchemas() throws SQLException {
         return getSchemas(null, null);
     }
 
@@ -3530,7 +3530,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
     }
 
     @Override
-    public java.sql.ResultSet getSuperTables(String arg0, String arg1, String arg2) throws SQLException {
+    public ResultSet getSuperTables(String arg0, String arg1, String arg2) throws SQLException {
         Field[] fields = new Field[4];
         fields[0] = new Field("", "TABLE_CAT", this.metadataCollationIndex, this.metadataEncoding, MysqlType.CHAR, 32);
         fields[1] = new Field("", "TABLE_SCHEM", this.metadataCollationIndex, this.metadataEncoding, MysqlType.CHAR, 32);
@@ -3542,7 +3542,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
     }
 
     @Override
-    public java.sql.ResultSet getSuperTypes(String arg0, String arg1, String arg2) throws SQLException {
+    public ResultSet getSuperTypes(String arg0, String arg1, String arg2) throws SQLException {
         Field[] fields = new Field[6];
         fields[0] = new Field("", "TYPE_CAT", this.metadataCollationIndex, this.metadataEncoding, MysqlType.CHAR, 32);
         fields[1] = new Field("", "TYPE_SCHEM", this.metadataCollationIndex, this.metadataEncoding, MysqlType.CHAR, 32);
@@ -3567,7 +3567,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
     }
 
     @Override
-    public java.sql.ResultSet getTablePrivileges(String catalog, String schemaPattern, String tableNamePattern) throws SQLException {
+    public ResultSet getTablePrivileges(String catalog, String schemaPattern, String tableNamePattern) throws SQLException {
         Field[] fields = new Field[7];
         fields[0] = new Field("", "TABLE_CAT", this.metadataCollationIndex, this.metadataEncoding, MysqlType.CHAR, 64);
         fields[1] = new Field("", "TABLE_SCHEM", this.metadataCollationIndex, this.metadataEncoding, MysqlType.CHAR, 1);
@@ -3641,7 +3641,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
                         String privilege = st.nextToken().trim();
 
                         // Loop through every column in the table
-                        java.sql.ResultSet columnResults = null;
+                        ResultSet columnResults = null;
 
                         try {
                             columnResults = getColumns(catalog, schemaPattern, table, null);
@@ -3693,7 +3693,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
     }
 
     @Override
-    public java.sql.ResultSet getTables(String catalog, String schemaPattern, String tableNamePattern, final String[] types) throws SQLException {
+    public ResultSet getTables(String catalog, String schemaPattern, String tableNamePattern, final String[] types) throws SQLException {
         final SortedMap<TableMetaDataKey, Row> sortedRows = new TreeMap<>();
         final ArrayList<Row> tuples = new ArrayList<>();
 
@@ -3897,7 +3897,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
         }
 
         tuples.addAll(sortedRows.values());
-        java.sql.ResultSet tables = this.resultSetFactory.createFromResultsetRows(ResultSet.CONCUR_READ_ONLY, ResultSet.TYPE_SCROLL_INSENSITIVE,
+        ResultSet tables = this.resultSetFactory.createFromResultsetRows(ResultSet.CONCUR_READ_ONLY, ResultSet.TYPE_SCROLL_INSENSITIVE,
                 new ResultsetRowsStatic(tuples, createTablesFields()));
 
         return tables;
@@ -3919,7 +3919,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
     }
 
     @Override
-    public java.sql.ResultSet getTableTypes() throws SQLException {
+    public ResultSet getTableTypes() throws SQLException {
         ArrayList<Row> tuples = new ArrayList<>();
         Field[] fields = new Field[] { new Field("", "TABLE_TYPE", this.metadataCollationIndex, this.metadataEncoding, MysqlType.VARCHAR, 256) };
 
@@ -4041,7 +4041,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
     }
 
     @Override
-    public java.sql.ResultSet getTypeInfo() throws SQLException {
+    public ResultSet getTypeInfo() throws SQLException {
         Field[] fields = new Field[18];
         fields[0] = new Field("", "TYPE_NAME", this.metadataCollationIndex, this.metadataEncoding, MysqlType.CHAR, 32);
         fields[1] = new Field("", "DATA_TYPE", this.metadataCollationIndex, this.metadataEncoding, MysqlType.INT, 5);
@@ -4139,7 +4139,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
     }
 
     @Override
-    public java.sql.ResultSet getUDTs(String catalog, String schemaPattern, String typeNamePattern, int[] types) throws SQLException {
+    public ResultSet getUDTs(String catalog, String schemaPattern, String typeNamePattern, int[] types) throws SQLException {
         Field[] fields = new Field[7];
         fields[0] = new Field("", "TYPE_CAT", this.metadataCollationIndex, this.metadataEncoding, MysqlType.VARCHAR, 32);
         fields[1] = new Field("", "TYPE_SCHEM", this.metadataCollationIndex, this.metadataEncoding, MysqlType.VARCHAR, 32);
@@ -4213,7 +4213,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
     }
 
     @Override
-    public java.sql.ResultSet getVersionColumns(String catalog, String schema, final String table) throws SQLException {
+    public ResultSet getVersionColumns(String catalog, String schema, final String table) throws SQLException {
         if (table == null) {
             throw SQLError.createSQLException(Messages.getString("DatabaseMetaData.2"), MysqlErrorNumbers.SQL_STATE_ILLEGAL_ARGUMENT,
                     getExceptionInterceptor());
@@ -4936,7 +4936,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
     }
 
     @Override
-    public java.sql.ResultSet getFunctions(String catalog, String schemaPattern, String functionNamePattern) throws SQLException {
+    public ResultSet getFunctions(String catalog, String schemaPattern, String functionNamePattern) throws SQLException {
         return getProceduresAndOrFunctions(getFunctionsFields(), catalog, schemaPattern, functionNamePattern, false, true);
     }
 
@@ -4958,9 +4958,9 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
      * @throws SQLException
      *             if a database access error occurs
      */
-    protected java.sql.PreparedStatement prepareMetaDataSafeStatement(String sql) throws SQLException {
+    protected PreparedStatement prepareMetaDataSafeStatement(String sql) throws SQLException {
         // Can't use server-side here as we coerce a lot of types to match the spec.
-        java.sql.PreparedStatement pStmt = this.conn.clientPrepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        PreparedStatement pStmt = this.conn.clientPrepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
         if (pStmt.getMaxRows() != 0) {
             pStmt.setMaxRows(0);
@@ -4972,7 +4972,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
     }
 
     @Override
-    public java.sql.ResultSet getPseudoColumns(String catalog, String schemaPattern, String tableNamePattern, String columnNamePattern) throws SQLException {
+    public ResultSet getPseudoColumns(String catalog, String schemaPattern, String tableNamePattern, String columnNamePattern) throws SQLException {
         Field[] fields = { new Field("", "TABLE_CAT", this.metadataCollationIndex, this.metadataEncoding, MysqlType.VARCHAR, 512),
                 new Field("", "TABLE_SCHEM", this.metadataCollationIndex, this.metadataEncoding, MysqlType.VARCHAR, 512),
                 new Field("", "TABLE_NAME", this.metadataCollationIndex, this.metadataEncoding, MysqlType.VARCHAR, 512),
@@ -4996,7 +4996,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
     }
 
     @Override
-    public <T> T unwrap(java.lang.Class<T> iface) throws java.sql.SQLException {
+    public <T> T unwrap(Class<T> iface) throws SQLException {
         try {
             // This works for classes that aren't actually wrapping
             // anything

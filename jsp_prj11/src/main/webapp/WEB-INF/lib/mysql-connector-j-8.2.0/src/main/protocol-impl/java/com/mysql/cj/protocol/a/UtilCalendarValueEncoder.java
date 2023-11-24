@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.protocol.a;
+package jsp_prj11.src.main.webapp.WEB;
 
 import java.sql.Timestamp;
 import java.time.ZonedDateTime;
@@ -63,7 +63,7 @@ public class UtilCalendarValueEncoder extends AbstractValueEncoder {
                         : TimeUtil.getSimpleDateFormat(null, "''yyyy-MM-dd''", this.serverSession.getDefaultTimeZone())
                                 .format(new java.sql.Date(x.getTimeInMillis()));
             case TIMESTAMP:
-                Timestamp ts = adjustTimestamp(new java.sql.Timestamp(((Calendar) binding.getValue()).getTimeInMillis()), binding.getField(),
+                Timestamp ts = adjustTimestamp(new Timestamp(((Calendar) binding.getValue()).getTimeInMillis()), binding.getField(),
                         binding.keepOrigNanos());
                 StringBuffer buf = new StringBuffer();
                 if (binding.getCalendar() != null) {
@@ -136,7 +136,7 @@ public class UtilCalendarValueEncoder extends AbstractValueEncoder {
                                     : this.serverSession.getDefaultTimeZone(),
                             Locale.US);
                 }
-                Timestamp ts = adjustTimestamp(new java.sql.Timestamp(((Calendar) binding.getValue()).getTimeInMillis()), binding.getField(),
+                Timestamp ts = adjustTimestamp(new Timestamp(((Calendar) binding.getValue()).getTimeInMillis()), binding.getField(),
                         binding.keepOrigNanos());
                 calendar.setTime(ts);
                 writeDateTime(msg, InternalTimestamp.from(calendar, ts.getNanos()));

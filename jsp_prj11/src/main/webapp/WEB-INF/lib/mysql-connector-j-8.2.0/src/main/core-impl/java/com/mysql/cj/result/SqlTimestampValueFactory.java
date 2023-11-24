@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.result;
+package jsp_prj11.src.main.webapp.WEB;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
@@ -45,7 +45,7 @@ import com.mysql.cj.protocol.InternalTime;
 import com.mysql.cj.protocol.InternalTimestamp;
 
 /**
- * Value factory to create {@link java.sql.Timestamp} instances. Timestamp instances are created from fields returned from the db without a timezone. In order
+ * Value factory to create {@link Timestamp} instances. Timestamp instances are created from fields returned from the db without a timezone. In order
  * to create a <i>point-in-time</i>, a time zone must be provided to interpret the fields.
  */
 public class SqlTimestampValueFactory extends AbstractDateTimeValueFactory<Timestamp> {

@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.protocol;
+package jsp_prj11.src.main.webapp.WEB;
 
 /**
  * A result streamer is a result object that is streaming results from the current connection. It allows to stream as long as nothing else needs to happen on

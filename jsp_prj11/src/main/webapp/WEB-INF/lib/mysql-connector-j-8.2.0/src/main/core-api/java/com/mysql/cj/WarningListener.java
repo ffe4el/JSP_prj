@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj;
+package jsp_prj11.src.main.webapp.WEB;
 
 /**
  * A warning listener is notified of warnings as they happen throughout the driver. They can be queued for consumption by JDBC clients, thrown as exceptions, or

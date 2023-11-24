@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.jdbc;
+package jsp_prj11.src.main.webapp.WEB;
 
 import java.sql.SQLClientInfoException;
 import java.sql.SQLException;
@@ -102,7 +102,7 @@ public interface ClientInfoProvider {
      * @throws SQLException
      *             if an error occurs
      * @return the client info by given property name
-     * @see java.sql.Connection#getClientInfo(java.lang.String)
+     * @see java.sql.Connection#getClientInfo(String)
      */
     String getClientInfo(java.sql.Connection conn, String name) throws SQLException;
 
@@ -123,7 +123,7 @@ public interface ClientInfoProvider {
      * @throws SQLClientInfoException
      *             if an error occurs
      *
-     * @see java.sql.Connection#setClientInfo(java.util.Properties)
+     * @see java.sql.Connection#setClientInfo(Properties)
      */
     void setClientInfo(java.sql.Connection conn, Properties properties) throws SQLClientInfoException;
 
@@ -146,7 +146,7 @@ public interface ClientInfoProvider {
      * @throws SQLClientInfoException
      *             if an error occurs
      *
-     * @see java.sql.Connection#setClientInfo(java.lang.String,java.lang.String)
+     * @see java.sql.Connection#setClientInfo(String, String)
      */
     void setClientInfo(java.sql.Connection conn, String name, String value) throws SQLClientInfoException;
 

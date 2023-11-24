@@ -31,4 +31,4 @@
  * Dev API test suite.
  */
 
-package testsuite.x.devapi;
+package jsp_prj11.src.main.webapp.WEB;

@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.protocol.x;
+package jsp_prj11.src.main.webapp.WEB;
 
 import java.security.DigestException;
 import java.util.Arrays;
@@ -116,7 +116,7 @@ public class XMessageBuilder implements MessageBuilder<XMessage> {
         keyValuePair.forEach((k, v) -> {
             Any val;
             if (XServerCapabilities.KEY_SESSION_CONNECT_ATTRS.equals(k) || XServerCapabilities.KEY_COMPRESSION.equals(k)) {
-                MysqlxDatatypes.Object.Builder attrB = MysqlxDatatypes.Object.newBuilder();
+                Builder attrB = MysqlxDatatypes.Object.newBuilder();
                 ((Map<String, Object>) v)
                         .forEach((name, value) -> attrB.addFld(ObjectField.newBuilder().setKey(name).setValue(ExprUtil.argObjectToScalarAny(value)).build()));
                 val = Any.newBuilder().setType(Any.Type.OBJECT).setObj(attrB).build();
@@ -600,11 +600,11 @@ public class XMessageBuilder implements MessageBuilder<XMessage> {
             throw new XProtocolError(Messages.getString("CreateTableStatement.0", new String[] { "collectionName" }));
         }
 
-        Builder argsBuilder = com.mysql.cj.x.protobuf.MysqlxDatatypes.Object.newBuilder()
+        Builder argsBuilder = MysqlxDatatypes.Object.newBuilder()
                 .addFld(ObjectField.newBuilder().setKey("name").setValue(ExprUtil.buildAny(collectionName)))
                 .addFld(ObjectField.newBuilder().setKey("schema").setValue(ExprUtil.buildAny(schemaName)));
 
-        Builder optBuilder = com.mysql.cj.x.protobuf.MysqlxDatatypes.Object.newBuilder();
+        Builder optBuilder = MysqlxDatatypes.Object.newBuilder();
 
         boolean hasOptions = false;
         if (options.getReuseExisting() != null) {
@@ -614,7 +614,7 @@ public class XMessageBuilder implements MessageBuilder<XMessage> {
 
         if (options.getValidation() != null) {
             hasOptions = true;
-            Builder validationBuilder = com.mysql.cj.x.protobuf.MysqlxDatatypes.Object.newBuilder();
+            Builder validationBuilder = MysqlxDatatypes.Object.newBuilder();
             if (options.getValidation().getSchema() != null) {
                 validationBuilder.addFld(ObjectField.newBuilder().setKey("schema").setValue(ExprUtil.buildAny(options.getValidation().getSchema())));
             }
@@ -640,14 +640,14 @@ public class XMessageBuilder implements MessageBuilder<XMessage> {
             throw new XProtocolError(Messages.getString("CreateTableStatement.0", new String[] { "collectionName" }));
         }
 
-        Builder argsBuilder = com.mysql.cj.x.protobuf.MysqlxDatatypes.Object.newBuilder()
+        Builder argsBuilder = MysqlxDatatypes.Object.newBuilder()
                 .addFld(ObjectField.newBuilder().setKey("name").setValue(ExprUtil.buildAny(collectionName)))
                 .addFld(ObjectField.newBuilder().setKey("schema").setValue(ExprUtil.buildAny(schemaName)));
 
-        Builder optBuilder = com.mysql.cj.x.protobuf.MysqlxDatatypes.Object.newBuilder();
+        Builder optBuilder = MysqlxDatatypes.Object.newBuilder();
 
         if (options != null && options.getValidation() != null) {
-            Builder validationBuilder = com.mysql.cj.x.protobuf.MysqlxDatatypes.Object.newBuilder();
+            Builder validationBuilder = MysqlxDatatypes.Object.newBuilder();
             if (options.getValidation().getSchema() != null) {
                 validationBuilder.addFld(ObjectField.newBuilder().setKey("schema").setValue(ExprUtil.buildAny(options.getValidation().getSchema())));
             }
@@ -673,7 +673,7 @@ public class XMessageBuilder implements MessageBuilder<XMessage> {
         }
         return new XMessage(buildXpluginCommand(XpluginStatementCommand.XPLUGIN_STMT_CREATE_COLLECTION,
                 Any.newBuilder().setType(Any.Type.OBJECT)
-                        .setObj(com.mysql.cj.x.protobuf.MysqlxDatatypes.Object.newBuilder()
+                        .setObj(MysqlxDatatypes.Object.newBuilder()
                                 .addFld(ObjectField.newBuilder().setKey("name").setValue(ExprUtil.buildAny(collectionName)))
                                 .addFld(ObjectField.newBuilder().setKey("schema").setValue(ExprUtil.buildAny(schemaName))))
                         .build()));
@@ -689,7 +689,7 @@ public class XMessageBuilder implements MessageBuilder<XMessage> {
         }
         return new XMessage(buildXpluginCommand(XpluginStatementCommand.XPLUGIN_STMT_DROP_COLLECTION,
                 Any.newBuilder().setType(Any.Type.OBJECT)
-                        .setObj(com.mysql.cj.x.protobuf.MysqlxDatatypes.Object.newBuilder()
+                        .setObj(MysqlxDatatypes.Object.newBuilder()
                                 .addFld(ObjectField.newBuilder().setKey("name").setValue(ExprUtil.buildAny(collectionName)))
                                 .addFld(ObjectField.newBuilder().setKey("schema").setValue(ExprUtil.buildAny(schemaName))))
                         .build()));
@@ -724,7 +724,7 @@ public class XMessageBuilder implements MessageBuilder<XMessage> {
             throw new XProtocolError(Messages.getString("CreateTableStatement.0", new String[] { "schemaName" }));
         }
 
-        Builder obj = com.mysql.cj.x.protobuf.MysqlxDatatypes.Object.newBuilder()
+        Builder obj = MysqlxDatatypes.Object.newBuilder()
                 .addFld(ObjectField.newBuilder().setKey("schema").setValue(ExprUtil.buildAny(schemaName)));
 
         if (pattern != null) {
@@ -736,25 +736,25 @@ public class XMessageBuilder implements MessageBuilder<XMessage> {
     }
 
     public XMessage buildEnableNotices(String... notices) {
-        com.mysql.cj.x.protobuf.MysqlxDatatypes.Array.Builder abuilder = com.mysql.cj.x.protobuf.MysqlxDatatypes.Array.newBuilder();
+        MysqlxDatatypes.Array.Builder abuilder = MysqlxDatatypes.Array.newBuilder();
         for (String notice : notices) {
             abuilder.addValue(ExprUtil.buildAny(notice));
         }
         return new XMessage(buildXpluginCommand(XpluginStatementCommand.XPLUGIN_STMT_ENABLE_NOTICES,
                 Any.newBuilder().setType(Any.Type.OBJECT)
-                        .setObj(com.mysql.cj.x.protobuf.MysqlxDatatypes.Object.newBuilder()
+                        .setObj(MysqlxDatatypes.Object.newBuilder()
                                 .addFld(ObjectField.newBuilder().setKey("notice").setValue(Any.newBuilder().setType(Any.Type.ARRAY).setArray(abuilder))))
                         .build()));
     }
 
     public XMessage buildDisableNotices(String... notices) {
-        com.mysql.cj.x.protobuf.MysqlxDatatypes.Array.Builder abuilder = com.mysql.cj.x.protobuf.MysqlxDatatypes.Array.newBuilder();
+        MysqlxDatatypes.Array.Builder abuilder = MysqlxDatatypes.Array.newBuilder();
         for (String notice : notices) {
             abuilder.addValue(ExprUtil.buildAny(notice));
         }
         return new XMessage(buildXpluginCommand(XpluginStatementCommand.XPLUGIN_STMT_DISABLE_NOTICES,
                 Any.newBuilder().setType(Any.Type.OBJECT)
-                        .setObj(com.mysql.cj.x.protobuf.MysqlxDatatypes.Object.newBuilder()
+                        .setObj(MysqlxDatatypes.Object.newBuilder()
                                 .addFld(ObjectField.newBuilder().setKey("notice").setValue(Any.newBuilder().setType(Any.Type.ARRAY).setArray(abuilder))))
                         .build()));
     }
@@ -775,7 +775,7 @@ public class XMessageBuilder implements MessageBuilder<XMessage> {
     }
 
     public XMessage buildCreateCollectionIndex(String schemaName, String collectionName, CreateIndexParams params) {
-        com.mysql.cj.x.protobuf.MysqlxDatatypes.Object.Builder builder = com.mysql.cj.x.protobuf.MysqlxDatatypes.Object.newBuilder();
+        Builder builder = MysqlxDatatypes.Object.newBuilder();
         builder.addFld(ObjectField.newBuilder().setKey("name").setValue(ExprUtil.buildAny(params.getIndexName())))
                 .addFld(ObjectField.newBuilder().setKey("collection").setValue(ExprUtil.buildAny(collectionName)))
                 .addFld(ObjectField.newBuilder().setKey("schema").setValue(ExprUtil.buildAny(schemaName)))
@@ -784,9 +784,9 @@ public class XMessageBuilder implements MessageBuilder<XMessage> {
             builder.addFld(ObjectField.newBuilder().setKey("type").setValue(ExprUtil.buildAny(params.getIndexType())));
         }
 
-        com.mysql.cj.x.protobuf.MysqlxDatatypes.Array.Builder aBuilder = com.mysql.cj.x.protobuf.MysqlxDatatypes.Array.newBuilder();
+        MysqlxDatatypes.Array.Builder aBuilder = MysqlxDatatypes.Array.newBuilder();
         for (IndexField indexField : params.getFields()) {
-            com.mysql.cj.x.protobuf.MysqlxDatatypes.Object.Builder fBuilder = com.mysql.cj.x.protobuf.MysqlxDatatypes.Object.newBuilder()
+            Builder fBuilder = MysqlxDatatypes.Object.newBuilder()
                     .addFld(ObjectField.newBuilder().setKey("member").setValue(ExprUtil.buildAny(indexField.getField())))
                     .addFld(ObjectField.newBuilder().setKey("type").setValue(ExprUtil.buildAny(indexField.getType())));
             if (indexField.isRequired() != null) {
@@ -814,7 +814,7 @@ public class XMessageBuilder implements MessageBuilder<XMessage> {
     public XMessage buildDropCollectionIndex(String schemaName, String collectionName, String indexName) {
         return new XMessage(buildXpluginCommand(XpluginStatementCommand.XPLUGIN_STMT_DROP_COLLECTION_INDEX,
                 Any.newBuilder().setType(Any.Type.OBJECT)
-                        .setObj(com.mysql.cj.x.protobuf.MysqlxDatatypes.Object.newBuilder()
+                        .setObj(MysqlxDatatypes.Object.newBuilder()
                                 .addFld(ObjectField.newBuilder().setKey("name").setValue(ExprUtil.buildAny(indexName)))
                                 .addFld(ObjectField.newBuilder().setKey("collection").setValue(ExprUtil.buildAny(collectionName)))
                                 .addFld(ObjectField.newBuilder().setKey("schema").setValue(ExprUtil.buildAny(schemaName)))

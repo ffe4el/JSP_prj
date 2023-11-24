@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.jdbc;
+package jsp_prj11.src.main.webapp.WEB;
 
 import java.io.Serializable;
 import java.lang.ref.WeakReference;
@@ -1021,7 +1021,7 @@ public class ConnectionImpl implements JdbcConnection, SessionEventListener, Ser
                     private static final long serialVersionUID = 7692318650375988114L;
 
                     @Override
-                    protected boolean removeEldestEntry(java.util.Map.Entry<CompoundCacheKey, ServerPreparedStatement> eldest) {
+                    protected boolean removeEldestEntry(Map.Entry<CompoundCacheKey, ServerPreparedStatement> eldest) {
                         if (this.maxElements <= 1) {
                             return false;
                         }
@@ -1061,7 +1061,7 @@ public class ConnectionImpl implements JdbcConnection, SessionEventListener, Ser
     @Override
     public java.sql.Statement createStatement(int resultSetType, int resultSetConcurrency, int resultSetHoldability) throws SQLException {
         if (this.pedantic.getValue()) {
-            if (resultSetHoldability != java.sql.ResultSet.HOLD_CURSORS_OVER_COMMIT) {
+            if (resultSetHoldability != ResultSet.HOLD_CURSORS_OVER_COMMIT) {
                 throw SQLError.createSQLException("HOLD_CUSRORS_OVER_COMMIT is only supported holdability level", MysqlErrorNumbers.SQL_STATE_ILLEGAL_ARGUMENT,
                         getExceptionInterceptor());
             }
@@ -1098,7 +1098,7 @@ public class ConnectionImpl implements JdbcConnection, SessionEventListener, Ser
 
     @Override
     public int getHoldability() throws SQLException {
-        return java.sql.ResultSet.CLOSE_CURSORS_AT_COMMIT;
+        return ResultSet.CLOSE_CURSORS_AT_COMMIT;
     }
 
     @Override
@@ -1122,11 +1122,11 @@ public class ConnectionImpl implements JdbcConnection, SessionEventListener, Ser
     }
 
     @Override
-    public java.sql.DatabaseMetaData getMetaData() throws SQLException {
+    public DatabaseMetaData getMetaData() throws SQLException {
         return getMetaData(true, true);
     }
 
-    private java.sql.DatabaseMetaData getMetaData(boolean checkClosed, boolean checkForInfoSchema) throws SQLException {
+    private DatabaseMetaData getMetaData(boolean checkClosed, boolean checkForInfoSchema) throws SQLException {
         if (checkClosed) {
             checkClosed();
         }
@@ -1191,7 +1191,7 @@ public class ConnectionImpl implements JdbcConnection, SessionEventListener, Ser
     }
 
     @Override
-    public java.util.Map<String, Class<?>> getTypeMap() throws SQLException {
+    public Map<String, Class<?>> getTypeMap() throws SQLException {
         synchronized (getConnectionMutex()) {
             if (this.typeMap == null) {
                 this.typeMap = new HashMap<>();
@@ -1509,7 +1509,7 @@ public class ConnectionImpl implements JdbcConnection, SessionEventListener, Ser
     @Override
     public java.sql.CallableStatement prepareCall(String sql, int resultSetType, int resultSetConcurrency, int resultSetHoldability) throws SQLException {
         if (this.pedantic.getValue()) {
-            if (resultSetHoldability != java.sql.ResultSet.HOLD_CURSORS_OVER_COMMIT) {
+            if (resultSetHoldability != ResultSet.HOLD_CURSORS_OVER_COMMIT) {
                 throw SQLError.createSQLException(Messages.getString("Connection.17"), MysqlErrorNumbers.SQL_STATE_ILLEGAL_ARGUMENT, getExceptionInterceptor());
             }
         }
@@ -1613,7 +1613,7 @@ public class ConnectionImpl implements JdbcConnection, SessionEventListener, Ser
     @Override
     public java.sql.PreparedStatement prepareStatement(String sql, int resultSetType, int resultSetConcurrency, int resultSetHoldability) throws SQLException {
         if (this.pedantic.getValue()) {
-            if (resultSetHoldability != java.sql.ResultSet.HOLD_CURSORS_OVER_COMMIT) {
+            if (resultSetHoldability != ResultSet.HOLD_CURSORS_OVER_COMMIT) {
                 throw SQLError.createSQLException(Messages.getString("Connection.17"), MysqlErrorNumbers.SQL_STATE_ILLEGAL_ARGUMENT, getExceptionInterceptor());
             }
         }
@@ -1932,7 +1932,7 @@ public class ConnectionImpl implements JdbcConnection, SessionEventListener, Ser
     public java.sql.PreparedStatement serverPrepareStatement(String sql, int resultSetType, int resultSetConcurrency, int resultSetHoldability)
             throws SQLException {
         if (this.pedantic.getValue()) {
-            if (resultSetHoldability != java.sql.ResultSet.HOLD_CURSORS_OVER_COMMIT) {
+            if (resultSetHoldability != ResultSet.HOLD_CURSORS_OVER_COMMIT) {
                 throw SQLError.createSQLException(Messages.getString("Connection.17"), MysqlErrorNumbers.SQL_STATE_ILLEGAL_ARGUMENT, getExceptionInterceptor());
             }
         }
@@ -2122,7 +2122,7 @@ public class ConnectionImpl implements JdbcConnection, SessionEventListener, Ser
     }
 
     @Override
-    public java.sql.Savepoint setSavepoint() throws SQLException {
+    public Savepoint setSavepoint() throws SQLException {
         MysqlSavepoint savepoint = new MysqlSavepoint(getExceptionInterceptor());
         setSavepoint(savepoint);
         return savepoint;
@@ -2145,7 +2145,7 @@ public class ConnectionImpl implements JdbcConnection, SessionEventListener, Ser
     }
 
     @Override
-    public java.sql.Savepoint setSavepoint(String name) throws SQLException {
+    public Savepoint setSavepoint(String name) throws SQLException {
         synchronized (getConnectionMutex()) {
             MysqlSavepoint savepoint = new MysqlSavepoint(name, getExceptionInterceptor());
             setSavepoint(savepoint);
@@ -2210,7 +2210,7 @@ public class ConnectionImpl implements JdbcConnection, SessionEventListener, Ser
     }
 
     @Override
-    public void setTypeMap(java.util.Map<String, Class<?>> map) throws SQLException {
+    public void setTypeMap(Map<String, Class<?>> map) throws SQLException {
         synchronized (getConnectionMutex()) {
             this.typeMap = map;
         }
@@ -2589,7 +2589,7 @@ public class ConnectionImpl implements JdbcConnection, SessionEventListener, Ser
     }
 
     @Override
-    public <T> T unwrap(java.lang.Class<T> iface) throws java.sql.SQLException {
+    public <T> T unwrap(Class<T> iface) throws SQLException {
         try {
             // This works for classes that aren't actually wrapping
             // anything

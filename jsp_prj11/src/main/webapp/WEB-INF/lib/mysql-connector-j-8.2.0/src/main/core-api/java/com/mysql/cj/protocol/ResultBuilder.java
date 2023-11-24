@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.protocol;
+package jsp_prj11.src.main.webapp.WEB;
 
 /**
  * Classes implementing this interface are responsible for building result of specific type from incoming ProtocolEntity objects.

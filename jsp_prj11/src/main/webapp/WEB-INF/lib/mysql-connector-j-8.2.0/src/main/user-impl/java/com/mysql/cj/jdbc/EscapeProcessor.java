@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.jdbc;
+package jsp_prj11.src.main.webapp.WEB;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -100,7 +100,7 @@ class EscapeProcessor {
      *             if error occurs
      */
     public static final Object escapeSQL(String sql, TimeZone connectionTimeZone, boolean serverSupportsFractionalSecond,
-            boolean serverTruncatesFractionalSecond, ExceptionInterceptor exceptionInterceptor) throws java.sql.SQLException {
+            boolean serverTruncatesFractionalSecond, ExceptionInterceptor exceptionInterceptor) throws SQLException {
         boolean replaceEscapeSequence = false;
         String escapeSequence = null;
 

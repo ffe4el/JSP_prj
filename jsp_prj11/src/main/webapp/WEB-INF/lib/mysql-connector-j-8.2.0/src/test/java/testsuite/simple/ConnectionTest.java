@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package testsuite.simple;
+package jsp_prj11.src.main.webapp.WEB;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -1216,7 +1216,7 @@ public class ConnectionTest extends BaseTestCase {
 
     @Test
     private void testInterfaceImplementation(Connection connToCheck) throws Exception {
-        Method[] dbmdMethods = java.sql.DatabaseMetaData.class.getMethods();
+        Method[] dbmdMethods = DatabaseMetaData.class.getMethods();
 
         // can't do this statically, as we return different
         // implementations depending on JDBC version
@@ -1226,19 +1226,19 @@ public class ConnectionTest extends BaseTestCase {
 
         Statement stmtToCheck = connToCheck.createStatement();
 
-        checkInterfaceImplemented(java.sql.Statement.class.getMethods(), stmtToCheck.getClass(), stmtToCheck);
+        checkInterfaceImplemented(Statement.class.getMethods(), stmtToCheck.getClass(), stmtToCheck);
 
         PreparedStatement pStmtToCheck = connToCheck.prepareStatement("SELECT 1");
         ParameterMetaData paramMd = pStmtToCheck.getParameterMetaData();
 
-        checkInterfaceImplemented(java.sql.PreparedStatement.class.getMethods(), pStmtToCheck.getClass(), pStmtToCheck);
-        checkInterfaceImplemented(java.sql.ParameterMetaData.class.getMethods(), paramMd.getClass(), paramMd);
+        checkInterfaceImplemented(PreparedStatement.class.getMethods(), pStmtToCheck.getClass(), pStmtToCheck);
+        checkInterfaceImplemented(ParameterMetaData.class.getMethods(), paramMd.getClass(), paramMd);
 
         pStmtToCheck = ((com.mysql.cj.jdbc.JdbcConnection) connToCheck).serverPrepareStatement("SELECT 1");
 
-        checkInterfaceImplemented(java.sql.PreparedStatement.class.getMethods(), pStmtToCheck.getClass(), pStmtToCheck);
+        checkInterfaceImplemented(PreparedStatement.class.getMethods(), pStmtToCheck.getClass(), pStmtToCheck);
         ResultSet toCheckRs = connToCheck.createStatement().executeQuery("SELECT 1");
-        checkInterfaceImplemented(java.sql.ResultSet.class.getMethods(), toCheckRs.getClass(), toCheckRs);
+        checkInterfaceImplemented(ResultSet.class.getMethods(), toCheckRs.getClass(), toCheckRs);
         toCheckRs = connToCheck.createStatement().executeQuery("SELECT 1");
         checkInterfaceImplemented(java.sql.ResultSetMetaData.class.getMethods(), toCheckRs.getMetaData().getClass(), toCheckRs.getMetaData());
 
@@ -1246,8 +1246,8 @@ public class ConnectionTest extends BaseTestCase {
 
         CallableStatement cstmt = connToCheck.prepareCall("{CALL interfaceImpl(?)}");
 
-        checkInterfaceImplemented(java.sql.CallableStatement.class.getMethods(), cstmt.getClass(), cstmt);
-        checkInterfaceImplemented(java.sql.Connection.class.getMethods(), connToCheck.getClass(), connToCheck);
+        checkInterfaceImplemented(CallableStatement.class.getMethods(), cstmt.getClass(), cstmt);
+        checkInterfaceImplemented(Connection.class.getMethods(), connToCheck.getClass(), connToCheck);
     }
 
     private void checkInterfaceImplemented(Method[] interfaceMethods, Class<?> implementingClass, Object invokeOn) throws NoSuchMethodException {
@@ -1264,7 +1264,7 @@ public class ConnectionTest extends BaseTestCase {
                 toMatch.invoke(invokeOn, args);
             } catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
 
-            } catch (java.lang.AbstractMethodError e) {
+            } catch (AbstractMethodError e) {
                 throw e;
             }
         }

@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.protocol;
+package jsp_prj11.src.main.webapp.WEB;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -309,7 +309,7 @@ public interface Protocol<M extends Message> {
          */
         void removeListener(ProtocolEventListener l);
 
-        void invokeListeners(EventType type, Throwable reason);
+        void invokeListeners(ProtocolEventListener.EventType type, Throwable reason);
 
     }
 

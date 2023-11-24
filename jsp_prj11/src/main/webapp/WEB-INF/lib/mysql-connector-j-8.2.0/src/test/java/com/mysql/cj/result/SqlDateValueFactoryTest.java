@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.result;
+package jsp_prj11.src.main.webapp.WEB;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -52,7 +52,7 @@ import com.mysql.cj.protocol.InternalTimestamp;
 import com.mysql.cj.util.TimeUtil;
 
 /**
- * Tests for JDBC {@link java.sql.Date} creation.
+ * Tests for JDBC {@link Date} creation.
  */
 public class SqlDateValueFactoryTest extends CommonAsserts {
 

@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.exceptions;
+package jsp_prj11.src.main.webapp.WEB;
 
 /**
  * Indicates that data could not be read according to the given request.

@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.protocol;
+package jsp_prj11.src.main.webapp.WEB;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -224,8 +224,8 @@ public class ExportControlled {
                 Certificate[] peerCerts = session.getPeerCertificates();
 
                 X509Certificate peerCert;
-                if (peerCerts[0] instanceof java.security.cert.X509Certificate) {
-                    peerCert = (java.security.cert.X509Certificate) peerCerts[0];
+                if (peerCerts[0] instanceof X509Certificate) {
+                    peerCert = (X509Certificate) peerCerts[0];
                 } else {
                     throw ExceptionFactory.createException(SSLParamsException.class,
                             "Server identity verification failed. Could not read Server's X.509 Certificate.");

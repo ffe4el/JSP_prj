@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.jdbc;
+package jsp_prj11.src.main.webapp.WEB;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -589,7 +589,7 @@ public class StatementImpl implements JdbcStatement {
      *         than read all at once.
      */
     protected boolean createStreamingResultSet() {
-        return this.query.getResultType() == Type.FORWARD_ONLY && this.resultSetConcurrency == java.sql.ResultSet.CONCUR_READ_ONLY
+        return this.query.getResultType() == Type.FORWARD_ONLY && this.resultSetConcurrency == ResultSet.CONCUR_READ_ONLY
                 && this.query.getResultFetchSize() == Integer.MIN_VALUE;
     }
 
@@ -781,7 +781,7 @@ public class StatementImpl implements JdbcStatement {
 
     @Override
     public boolean execute(String sql, int returnGeneratedKeys) throws SQLException {
-        return executeInternal(sql, returnGeneratedKeys == java.sql.Statement.RETURN_GENERATED_KEYS);
+        return executeInternal(sql, returnGeneratedKeys == Statement.RETURN_GENERATED_KEYS);
     }
 
     @Override
@@ -878,7 +878,7 @@ public class StatementImpl implements JdbcStatement {
 
                                     if (hasDeadlockOrTimeoutRolledBackTx(ex)) {
                                         for (int i = 0; i < newUpdateCounts.length; i++) {
-                                            newUpdateCounts[i] = java.sql.Statement.EXECUTE_FAILED;
+                                            newUpdateCounts[i] = Statement.EXECUTE_FAILED;
                                         }
                                     } else {
                                         System.arraycopy(updateCounts, 0, newUpdateCounts, 0, commandIndex);
@@ -955,7 +955,7 @@ public class StatementImpl implements JdbcStatement {
                 this.session.enableMultiQueries();
             }
 
-            java.sql.Statement batchStmt = null;
+            Statement batchStmt = null;
 
             CancelQueryTask timeoutTask = null;
 
@@ -1001,7 +1001,7 @@ public class StatementImpl implements JdbcStatement {
                     if (((queryBuf.length() + nextQuery.length()) * numberOfBytesPerChar + 1 /* for semicolon */
                             + NativeConstants.HEADER_LENGTH) * escapeAdjust + 32 > this.maxAllowedPacket.getValue()) {
                         try {
-                            batchStmt.execute(queryBuf.toString(), java.sql.Statement.RETURN_GENERATED_KEYS);
+                            batchStmt.execute(queryBuf.toString(), Statement.RETURN_GENERATED_KEYS);
                         } catch (SQLException ex) {
                             sqlEx = handleExceptionForBatch(commandIndex, argumentSetsInBatchSoFar, updateCounts, ex);
                         }
@@ -1019,7 +1019,7 @@ public class StatementImpl implements JdbcStatement {
 
                 if (queryBuf.length() > 0) {
                     try {
-                        batchStmt.execute(queryBuf.toString(), java.sql.Statement.RETURN_GENERATED_KEYS);
+                        batchStmt.execute(queryBuf.toString(), Statement.RETURN_GENERATED_KEYS);
                     } catch (SQLException ex) {
                         sqlEx = handleExceptionForBatch(commandIndex - 1, argumentSetsInBatchSoFar, updateCounts, ex);
                     }
@@ -1104,7 +1104,7 @@ public class StatementImpl implements JdbcStatement {
     }
 
     @Override
-    public java.sql.ResultSet executeQuery(String sql) throws SQLException {
+    public ResultSet executeQuery(String sql) throws SQLException {
         synchronized (checkClosed().getConnectionMutex()) {
             JdbcConnection locallyScopedConn = this.connection;
 
@@ -1359,7 +1359,7 @@ public class StatementImpl implements JdbcStatement {
 
     @Override
     public int getFetchDirection() throws SQLException {
-        return java.sql.ResultSet.FETCH_FORWARD;
+        return ResultSet.FETCH_FORWARD;
     }
 
     @Override
@@ -1370,7 +1370,7 @@ public class StatementImpl implements JdbcStatement {
     }
 
     @Override
-    public java.sql.ResultSet getGeneratedKeys() throws SQLException {
+    public ResultSet getGeneratedKeys() throws SQLException {
         synchronized (checkClosed().getConnectionMutex()) {
             if (!this.retrieveGeneratedKeys) {
                 throw SQLError.createSQLException(Messages.getString("Statement.GeneratedKeysNotRequested"), MysqlErrorNumbers.SQL_STATE_ILLEGAL_ARGUMENT,
@@ -1541,7 +1541,7 @@ public class StatementImpl implements JdbcStatement {
             ResultSetInternalMethods nextResultSet = (ResultSetInternalMethods) this.results.getNextResultset();
 
             switch (current) {
-                case java.sql.Statement.CLOSE_CURRENT_RESULT:
+                case Statement.CLOSE_CURRENT_RESULT:
 
                     if (this.results != null) {
                         if (!(streamingMode || this.dontTrackOpenResources.getValue())) {
@@ -1553,7 +1553,7 @@ public class StatementImpl implements JdbcStatement {
 
                     break;
 
-                case java.sql.Statement.CLOSE_ALL_RESULTS:
+                case Statement.CLOSE_ALL_RESULTS:
 
                     if (this.results != null) {
                         if (!(streamingMode || this.dontTrackOpenResources.getValue())) {
@@ -1567,7 +1567,7 @@ public class StatementImpl implements JdbcStatement {
 
                     break;
 
-                case java.sql.Statement.KEEP_CURRENT_RESULT:
+                case Statement.KEEP_CURRENT_RESULT:
                     if (!this.dontTrackOpenResources.getValue()) {
                         this.openResults.add(this.results);
                     }
@@ -1678,9 +1678,9 @@ public class StatementImpl implements JdbcStatement {
     }
 
     @Override
-    public java.sql.ResultSet getResultSet() throws SQLException {
+    public ResultSet getResultSet() throws SQLException {
         synchronized (checkClosed().getConnectionMutex()) {
-            return this.results != null && this.results.hasRows() ? (java.sql.ResultSet) this.results : null;
+            return this.results != null && this.results.hasRows() ? (ResultSet) this.results : null;
         }
     }
 
@@ -1693,7 +1693,7 @@ public class StatementImpl implements JdbcStatement {
 
     @Override
     public int getResultSetHoldability() throws SQLException {
-        return java.sql.ResultSet.HOLD_CURSORS_OVER_COMMIT;
+        return ResultSet.HOLD_CURSORS_OVER_COMMIT;
     }
 
     @Override
@@ -1720,7 +1720,7 @@ public class StatementImpl implements JdbcStatement {
     }
 
     @Override
-    public java.sql.SQLWarning getWarnings() throws SQLException {
+    public SQLWarning getWarnings() throws SQLException {
         synchronized (checkClosed().getConnectionMutex()) {
 
             if (isClearWarningsCalled()) {
@@ -1825,9 +1825,9 @@ public class StatementImpl implements JdbcStatement {
     @Override
     public void setFetchDirection(int direction) throws SQLException {
         switch (direction) {
-            case java.sql.ResultSet.FETCH_FORWARD:
-            case java.sql.ResultSet.FETCH_REVERSE:
-            case java.sql.ResultSet.FETCH_UNKNOWN:
+            case ResultSet.FETCH_FORWARD:
+            case ResultSet.FETCH_REVERSE:
+            case ResultSet.FETCH_UNKNOWN:
                 break;
 
             default:
@@ -1935,10 +1935,10 @@ public class StatementImpl implements JdbcStatement {
         this.query.setResultType(Type.fromValue(typeFlag, Type.FORWARD_ONLY));
     }
 
-    protected void getBatchedGeneratedKeys(java.sql.Statement batchedStatement) throws SQLException {
+    protected void getBatchedGeneratedKeys(Statement batchedStatement) throws SQLException {
         synchronized (checkClosed().getConnectionMutex()) {
             if (this.retrieveGeneratedKeys) {
-                java.sql.ResultSet rs = null;
+                ResultSet rs = null;
 
                 try {
                     rs = batchedStatement.getGeneratedKeys();
@@ -1958,7 +1958,7 @@ public class StatementImpl implements JdbcStatement {
     protected void getBatchedGeneratedKeys(int maxKeys) throws SQLException {
         synchronized (checkClosed().getConnectionMutex()) {
             if (this.retrieveGeneratedKeys) {
-                java.sql.ResultSet rs = null;
+                ResultSet rs = null;
 
                 try {
                     rs = maxKeys == 0 ? getGeneratedKeysInternal() : getGeneratedKeysInternal(maxKeys);
@@ -2083,7 +2083,7 @@ public class StatementImpl implements JdbcStatement {
 
     @Override
     public long executeLargeUpdate(String sql, int autoGeneratedKeys) throws SQLException {
-        return executeUpdateInternal(sql, false, autoGeneratedKeys == java.sql.Statement.RETURN_GENERATED_KEYS);
+        return executeUpdateInternal(sql, false, autoGeneratedKeys == Statement.RETURN_GENERATED_KEYS);
     }
 
     @Override

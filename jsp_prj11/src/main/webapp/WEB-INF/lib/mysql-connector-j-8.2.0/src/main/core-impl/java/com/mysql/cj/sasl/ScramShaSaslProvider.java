@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.sasl;
+package jsp_prj11.src.main.webapp.WEB;
 
 import java.security.AccessController;
 import java.security.InvalidParameterException;
@@ -47,7 +47,7 @@ public final class ScramShaSaslProvider extends Provider {
     private static final String INFO = "MySQL Connector/J SASL provider (implements client mechanisms for " + ScramSha1SaslClient.MECHANISM_NAME + " and "
             + ScramSha256SaslClient.MECHANISM_NAME + ")";
 
-    private static final class ProviderService extends Provider.Service {
+    private static final class ProviderService extends Service {
 
         public ProviderService(Provider provider, String type, String algorithm, String className) {
             super(provider, type, algorithm, className, null, null);

@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.result;
+package jsp_prj11.src.main.webapp.WEB;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -42,7 +42,7 @@ import com.mysql.cj.util.DataTypeUtil;
 import com.mysql.cj.util.StringUtils;
 
 /**
- * A value factory for creating {@link java.lang.Boolean} values.
+ * A value factory for creating {@link Boolean} values.
  */
 public class BooleanValueFactory extends DefaultValueFactory<Boolean> {
 

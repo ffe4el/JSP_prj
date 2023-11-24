@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.protocol.x;
+package jsp_prj11.src.main.webapp.WEB;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -164,7 +164,7 @@ public class CompressionTest {
             fail(e.getMessage());
         }
         Compression compressionMessage = Compression.newBuilder().setUncompressedSize(uncompressedFrame1.length)
-                .setClientMessages(Mysqlx.ClientMessages.Type.forNumber(1)).setPayload(ByteString.copyFrom(compressedOut.toByteArray())).build();
+                .setClientMessages(ClientMessages.Type.forNumber(1)).setPayload(ByteString.copyFrom(compressedOut.toByteArray())).build();
         byte[] compressedData = compressionMessage.toByteArray();
         int compressedLength = compressionMessage.getSerializedSize();
         uplinkCompressedFrame = new byte[XMessageHeader.HEADER_LENGTH + compressedLength];

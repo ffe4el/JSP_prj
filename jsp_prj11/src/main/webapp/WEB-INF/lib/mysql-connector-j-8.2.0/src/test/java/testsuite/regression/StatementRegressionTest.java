@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package testsuite.regression;
+package jsp_prj11.src.main.webapp.WEB;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -981,9 +981,9 @@ public class StatementRegressionTest extends BaseTestCase {
             Blob valueAsBlob = this.rs.getBlob(1);
 
             PreparedStatement pStmt = this.conn.prepareStatement("INSERT INTO testBug1901 VALUES (?)");
-            pStmt.setObject(1, valueAsClob, java.sql.Types.CLOB, 0);
+            pStmt.setObject(1, valueAsClob, Types.CLOB, 0);
             pStmt.executeUpdate();
-            pStmt.setObject(1, valueAsBlob, java.sql.Types.BLOB, 0);
+            pStmt.setObject(1, valueAsBlob, Types.BLOB, 0);
             pStmt.executeUpdate();
         } finally {
             this.stmt.executeUpdate("DROP TABLE IF EXISTS testBug1901");
@@ -1062,7 +1062,7 @@ public class StatementRegressionTest extends BaseTestCase {
 
             System.out.println("Before prepareStatement()");
 
-            this.pstmt = this.conn.prepareStatement("INSERT INTO testBug1934 VALUES (?)", java.sql.Statement.RETURN_GENERATED_KEYS);
+            this.pstmt = this.conn.prepareStatement("INSERT INTO testBug1934 VALUES (?)", Statement.RETURN_GENERATED_KEYS);
 
             assertTrue(this.pstmt != null);
 
@@ -1144,7 +1144,7 @@ public class StatementRegressionTest extends BaseTestCase {
 
         String query = "UPDATE test3 SET field2=?, field3=?, field4=?, field5=? WHERE field1 = ?";
 
-        java.sql.Date mydate = null;
+        Date mydate = null;
 
         this.pstmt = this.conn.prepareStatement(query);
 
@@ -1478,11 +1478,11 @@ public class StatementRegressionTest extends BaseTestCase {
 
             pStmt.setString(1, "0");
             pStmt.setString(2, "0");
-            pStmt.setTimestamp(3, new java.sql.Timestamp(System.currentTimeMillis()));
+            pStmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
             pStmt.setString(4, "ABC");
             pStmt.setString(5, "DEF");
             pStmt.setString(6, "AA");
-            pStmt.setTimestamp(7, new java.sql.Timestamp(System.currentTimeMillis()));
+            pStmt.setTimestamp(7, new Timestamp(System.currentTimeMillis()));
             pStmt.setString(8, "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
             pStmt.executeUpdate();
         } finally {
@@ -2320,7 +2320,7 @@ public class StatementRegressionTest extends BaseTestCase {
     public void testServerPrepStmtAndDate() throws Exception {
         createTable("testServerPrepStmtAndDate",
                 "(`P_ID` int(10) NOT NULL default '0', `R_Date` date default NULL, UNIQUE KEY `P_ID` (`P_ID`), KEY `R_Date` (`R_Date`))");
-        Date dt = new java.sql.Date(102, 1, 2); // Note, this represents the date 2002-02-02
+        Date dt = new Date(102, 1, 2); // Note, this represents the date 2002-02-02
 
         PreparedStatement pStmt2 = this.conn.prepareStatement("INSERT INTO testServerPrepStmtAndDate (P_ID, R_Date) VALUES (171576, ?)");
         pStmt2.setDate(1, dt);
@@ -3549,61 +3549,61 @@ public class StatementRegressionTest extends BaseTestCase {
 
         String sPrepStmt = "{call Bit_In_MinXXX(?)}";
         this.pstmt = this.conn.prepareStatement(sPrepStmt);
-        this.pstmt.setObject(1, "true", java.sql.Types.BIT);
+        this.pstmt.setObject(1, "true", Types.BIT);
         this.pstmt.executeUpdate();
         assertEquals("true", getSingleIndexedValueWithQuery(1, "SELECT MIN_VAL FROM Bit_TabXXX").toString());
         this.stmt.execute("TRUNCATE TABLE Bit_TabXXX");
         this.stmt.execute("insert into Bit_TabXXX values(null,0,null)");
 
-        this.pstmt.setObject(1, "false", java.sql.Types.BIT);
+        this.pstmt.setObject(1, "false", Types.BIT);
         this.pstmt.executeUpdate();
         assertEquals("false", getSingleIndexedValueWithQuery(1, "SELECT MIN_VAL FROM Bit_TabXXX").toString());
         this.stmt.execute("TRUNCATE TABLE Bit_TabXXX");
         this.stmt.execute("insert into Bit_TabXXX values(null,0,null)");
 
-        this.pstmt.setObject(1, "1", java.sql.Types.BIT); // fails
+        this.pstmt.setObject(1, "1", Types.BIT); // fails
         this.pstmt.executeUpdate();
         assertEquals("true", getSingleIndexedValueWithQuery(1, "SELECT MIN_VAL FROM Bit_TabXXX").toString());
         this.stmt.execute("TRUNCATE TABLE Bit_TabXXX");
         this.stmt.execute("insert into Bit_TabXXX values(null,0,null)");
 
-        this.pstmt.setObject(1, "0", java.sql.Types.BIT);
+        this.pstmt.setObject(1, "0", Types.BIT);
         this.pstmt.executeUpdate();
         assertEquals("false", getSingleIndexedValueWithQuery(1, "SELECT MIN_VAL FROM Bit_TabXXX").toString());
         this.stmt.execute("TRUNCATE TABLE Bit_TabXXX");
         this.stmt.execute("insert into Bit_TabXXX values(null,0,null)");
 
-        this.pstmt.setObject(1, Boolean.TRUE, java.sql.Types.BIT);
+        this.pstmt.setObject(1, Boolean.TRUE, Types.BIT);
         this.pstmt.executeUpdate();
         assertEquals("true", getSingleIndexedValueWithQuery(1, "SELECT MIN_VAL FROM Bit_TabXXX").toString());
         this.stmt.execute("TRUNCATE TABLE Bit_TabXXX");
         this.stmt.execute("insert into Bit_TabXXX values(null,0,null)");
 
-        this.pstmt.setObject(1, Boolean.FALSE, java.sql.Types.BIT);
+        this.pstmt.setObject(1, Boolean.FALSE, Types.BIT);
         this.pstmt.executeUpdate();
         assertEquals("false", getSingleIndexedValueWithQuery(1, "SELECT MIN_VAL FROM Bit_TabXXX").toString());
         this.stmt.execute("TRUNCATE TABLE Bit_TabXXX");
         this.stmt.execute("insert into Bit_TabXXX values(null,0,null)");
 
-        this.pstmt.setObject(1, new Boolean(true), java.sql.Types.BIT);
+        this.pstmt.setObject(1, new Boolean(true), Types.BIT);
         this.pstmt.executeUpdate();
         assertEquals("true", getSingleIndexedValueWithQuery(1, "SELECT MIN_VAL FROM Bit_TabXXX").toString());
         this.stmt.execute("TRUNCATE TABLE Bit_TabXXX");
         this.stmt.execute("insert into Bit_TabXXX values(null,0,null)");
 
-        this.pstmt.setObject(1, new Boolean(false), java.sql.Types.BIT);
+        this.pstmt.setObject(1, new Boolean(false), Types.BIT);
         this.pstmt.executeUpdate();
         assertEquals("false", getSingleIndexedValueWithQuery(1, "SELECT MIN_VAL FROM Bit_TabXXX").toString());
         this.stmt.execute("TRUNCATE TABLE Bit_TabXXX");
         this.stmt.execute("insert into Bit_TabXXX values(null,0,null)");
 
-        this.pstmt.setObject(1, new Byte("1"), java.sql.Types.BIT);
+        this.pstmt.setObject(1, new Byte("1"), Types.BIT);
         this.pstmt.executeUpdate();
         assertEquals("true", getSingleIndexedValueWithQuery(1, "SELECT MIN_VAL FROM Bit_TabXXX").toString());
         this.stmt.execute("TRUNCATE TABLE Bit_TabXXX");
         this.stmt.execute("insert into Bit_TabXXX values(null,0,null)");
 
-        this.pstmt.setObject(1, new Byte("0"), java.sql.Types.BIT);
+        this.pstmt.setObject(1, new Byte("0"), Types.BIT);
         this.pstmt.executeUpdate();
         assertEquals("false", getSingleIndexedValueWithQuery(1, "SELECT MIN_VAL FROM Bit_TabXXX").toString());
     }
@@ -3740,9 +3740,9 @@ public class StatementRegressionTest extends BaseTestCase {
         this.stmt.executeUpdate(Min_Insert);
         cstmt = this.conn.prepareCall("{call Bit_Proc(?,?,?)}");
 
-        cstmt.registerOutParameter(1, java.sql.Types.BIT);
-        cstmt.registerOutParameter(2, java.sql.Types.BIT);
-        cstmt.registerOutParameter(3, java.sql.Types.BIT);
+        cstmt.registerOutParameter(1, Types.BIT);
+        cstmt.registerOutParameter(2, Types.BIT);
+        cstmt.registerOutParameter(3, Types.BIT);
 
         cstmt.executeUpdate();
 
@@ -5297,43 +5297,43 @@ public class StatementRegressionTest extends BaseTestCase {
         assertEquals("0", getSingleIndexedValueWithQuery(rewriteConn, 2, "SHOW SESSION STATUS LIKE 'Com_insert'").toString());
 
         this.pstmt = rewriteConn.prepareStatement("INSERT INTO testBatchInsert VALUES (?)");
-        this.pstmt.setNull(1, java.sql.Types.INTEGER);
+        this.pstmt.setNull(1, Types.INTEGER);
         this.pstmt.addBatch();
-        this.pstmt.setNull(1, java.sql.Types.INTEGER);
+        this.pstmt.setNull(1, Types.INTEGER);
         this.pstmt.addBatch();
-        this.pstmt.setNull(1, java.sql.Types.INTEGER);
+        this.pstmt.setNull(1, Types.INTEGER);
         this.pstmt.addBatch();
         this.pstmt.executeBatch();
 
         assertEquals("1", getSingleIndexedValueWithQuery(rewriteConn, 2, "SHOW SESSION STATUS LIKE 'Com_insert'").toString());
         this.pstmt = rewriteConn.prepareStatement("INSERT INTO `testBatchInsert`VALUES (?)");
-        this.pstmt.setNull(1, java.sql.Types.INTEGER);
+        this.pstmt.setNull(1, Types.INTEGER);
         this.pstmt.addBatch();
-        this.pstmt.setNull(1, java.sql.Types.INTEGER);
+        this.pstmt.setNull(1, Types.INTEGER);
         this.pstmt.addBatch();
-        this.pstmt.setNull(1, java.sql.Types.INTEGER);
+        this.pstmt.setNull(1, Types.INTEGER);
         this.pstmt.addBatch();
         this.pstmt.executeBatch();
 
         assertEquals("2", getSingleIndexedValueWithQuery(rewriteConn, 2, "SHOW SESSION STATUS LIKE 'Com_insert'").toString());
 
         this.pstmt = rewriteConn.prepareStatement("INSERT INTO testBatchInsert VALUES(?)");
-        this.pstmt.setNull(1, java.sql.Types.INTEGER);
+        this.pstmt.setNull(1, Types.INTEGER);
         this.pstmt.addBatch();
-        this.pstmt.setNull(1, java.sql.Types.INTEGER);
+        this.pstmt.setNull(1, Types.INTEGER);
         this.pstmt.addBatch();
-        this.pstmt.setNull(1, java.sql.Types.INTEGER);
+        this.pstmt.setNull(1, Types.INTEGER);
         this.pstmt.addBatch();
         this.pstmt.executeBatch();
 
         assertEquals("3", getSingleIndexedValueWithQuery(rewriteConn, 2, "SHOW SESSION STATUS LIKE 'Com_insert'").toString());
 
         this.pstmt = rewriteConn.prepareStatement("INSERT INTO testBatchInsert VALUES\n(?)");
-        this.pstmt.setNull(1, java.sql.Types.INTEGER);
+        this.pstmt.setNull(1, Types.INTEGER);
         this.pstmt.addBatch();
-        this.pstmt.setNull(1, java.sql.Types.INTEGER);
+        this.pstmt.setNull(1, Types.INTEGER);
         this.pstmt.addBatch();
-        this.pstmt.setNull(1, java.sql.Types.INTEGER);
+        this.pstmt.setNull(1, Types.INTEGER);
         this.pstmt.addBatch();
         this.pstmt.executeBatch();
 
@@ -5822,7 +5822,7 @@ public class StatementRegressionTest extends BaseTestCase {
         public <T extends Resultset> T preProcess(Supplier<String> sql, Query interceptedQuery) {
             if (sql.get().equals("SELECT 1")) {
                 try {
-                    java.sql.Statement test = this.connection.createStatement();
+                    Statement test = this.connection.createStatement();
                     return (T) test.executeQuery("/* execute this, not the original */ SELECT 1");
                 } catch (SQLException ex) {
                     throw ExceptionFactory.createException(ex.getMessage(), ex);
@@ -9751,16 +9751,16 @@ public class StatementRegressionTest extends BaseTestCase {
 
                 PreparedStatement testPstmt = testConn.prepareStatement("INSERT INTO testBug23201930 (id, fl) VALUES (?, ?)", ResultSet.TYPE_FORWARD_ONLY,
                         ResultSet.CONCUR_UPDATABLE);
-                testPstmt.setObject(1, 101, java.sql.Types.INTEGER);
-                testPstmt.setObject(2, longData, java.sql.Types.VARCHAR);
+                testPstmt.setObject(1, 101, Types.INTEGER);
+                testPstmt.setObject(2, longData, Types.VARCHAR);
                 testPstmt.execute();
-                testPstmt.setObject(1, 102, java.sql.Types.INTEGER);
+                testPstmt.setObject(1, 102, Types.INTEGER);
                 testPstmt.execute();
                 testPstmt.close();
 
                 testPstmt = testConn.prepareStatement("SELECT * FROM testBug23201930 WHERE id >= ? ORDER BY id ASC", ResultSet.TYPE_FORWARD_ONLY,
                         ResultSet.CONCUR_UPDATABLE);
-                testPstmt.setObject(1, 100, java.sql.Types.INTEGER);
+                testPstmt.setObject(1, 100, Types.INTEGER);
                 final ResultSet testRs = testPstmt.executeQuery();
                 assertTrue(testRs.next());
                 assertEquals(100, testRs.getInt(1));
@@ -10616,14 +10616,14 @@ public class StatementRegressionTest extends BaseTestCase {
                 ps.setString(1, "abc2");
                 ps.setString(2, "xyz2");
                 ps.addBatch();
-                ps.setNull(1, java.sql.Types.VARCHAR);
+                ps.setNull(1, Types.VARCHAR);
                 ps.setString(2, "xyz4");
                 ps.addBatch();
                 ps.setString(1, "abc4");
-                ps.setNull(2, java.sql.Types.VARCHAR);
+                ps.setNull(2, Types.VARCHAR);
                 ps.addBatch();
-                ps.setNull(1, java.sql.Types.VARCHAR);
-                ps.setNull(2, java.sql.Types.VARCHAR);
+                ps.setNull(1, Types.VARCHAR);
+                ps.setNull(2, Types.VARCHAR);
                 ps.addBatch();
                 ps.executeBatch();
                 ps.close();
@@ -10645,7 +10645,7 @@ public class StatementRegressionTest extends BaseTestCase {
                 ps.setQueryTimeout(2);
                 ps.setString(1, "abc1");
                 ps.addBatch();
-                ps.setNull(1, java.sql.Types.VARCHAR);
+                ps.setNull(1, Types.VARCHAR);
                 ps.addBatch();
                 ps.setString(1, "abc4");
                 ps.addBatch();
@@ -10683,14 +10683,14 @@ public class StatementRegressionTest extends BaseTestCase {
                 ps.setInt(1, 0);
                 ps.setInt(2, 1);
                 ps.addBatch();
-                ps.setNull(1, java.sql.Types.INTEGER);
+                ps.setNull(1, Types.INTEGER);
                 ps.setInt(2, 1);
                 ps.addBatch();
                 ps.setInt(1, 4);
-                ps.setNull(2, java.sql.Types.INTEGER);
+                ps.setNull(2, Types.INTEGER);
                 ps.addBatch();
-                ps.setNull(1, java.sql.Types.INTEGER);
-                ps.setNull(2, java.sql.Types.INTEGER);
+                ps.setNull(1, Types.INTEGER);
+                ps.setNull(2, Types.INTEGER);
                 ps.addBatch();
                 try {
                     ps.executeBatch();
@@ -11018,7 +11018,7 @@ public class StatementRegressionTest extends BaseTestCase {
             Connection testConn = getConnectionWithProps(props);
 
             this.pstmt = testConn.prepareStatement("update testBug22931700 set c1=?,c2=? ");
-            this.pstmt.setNull(1, java.sql.Types.INTEGER);
+            this.pstmt.setNull(1, Types.INTEGER);
             this.pstmt.setBoolean(2, true);
 
             ParameterBindings bindings = ((JdbcPreparedStatement) this.pstmt).getParameterBindings();
@@ -11127,8 +11127,8 @@ public class StatementRegressionTest extends BaseTestCase {
                     Connection con = getConnectionWithProps(props);
 
                     PreparedStatement pst1 = con.prepareStatement("insert into testBug91112 values (?, ?, ?)");
-                    java.sql.Date d_1982_04_01_MSK = java.sql.Date.valueOf("1982-04-01");
-                    java.sql.Date d_1990_10_20_MSK = java.sql.Date.valueOf("1990-10-20");
+                    Date d_1982_04_01_MSK = Date.valueOf("1982-04-01");
+                    Date d_1990_10_20_MSK = Date.valueOf("1990-10-20");
                     LocalDate ld_1990_10_20 = LocalDate.of(1990, 10, 20);
 
                     pst1.setDate(1, d_1982_04_01_MSK);
@@ -11172,8 +11172,8 @@ public class StatementRegressionTest extends BaseTestCase {
         }
     }
 
-    public void testBug91112CheckResultMSK(java.sql.Date d_1982_04_01_MSK, java.sql.Date d_1990_10_20_MSK, Calendar cal_Los_Angeles,
-            SimpleDateFormat sdf_Los_Angeles) throws Exception {
+    public void testBug91112CheckResultMSK(Date d_1982_04_01_MSK, Date d_1990_10_20_MSK, Calendar cal_Los_Angeles,
+                                           SimpleDateFormat sdf_Los_Angeles) throws Exception {
         assertTrue(this.rs.next());
         assertEquals("1982-04-01", this.rs.getString(1));
         assertEquals("1982-04-01", this.rs.getString(2));
@@ -11189,8 +11189,8 @@ public class StatementRegressionTest extends BaseTestCase {
         assertEquals(d_1990_10_20_MSK, this.rs.getDate(5, Calendar.getInstance()));
     }
 
-    public void testBug91112CheckResultBerlin(java.sql.Date d_1982_04_01_MSK, java.sql.Date d_1990_10_20_MSK, Calendar cal_Los_Angeles,
-            SimpleDateFormat sdf_Los_Angeles, boolean cacheDefaultTimeZone) throws Exception {
+    public void testBug91112CheckResultBerlin(Date d_1982_04_01_MSK, Date d_1990_10_20_MSK, Calendar cal_Los_Angeles,
+                                              SimpleDateFormat sdf_Los_Angeles, boolean cacheDefaultTimeZone) throws Exception {
         assertTrue(this.rs.next());
         if (cacheDefaultTimeZone) {
             assertEquals("1982-04-01", this.rs.getString(1));
@@ -11205,8 +11205,8 @@ public class StatementRegressionTest extends BaseTestCase {
         assertEquals("1990-10-20", this.rs.getString(5));
         assertEquals("1990-10-20", this.rs.getString(6));
 
-        java.sql.Date d_1982_03_31_Berlin = java.sql.Date.valueOf("1982-03-31");
-        java.sql.Date d_1990_10_20_Berlin = java.sql.Date.valueOf("1990-10-20");
+        Date d_1982_03_31_Berlin = Date.valueOf("1982-03-31");
+        Date d_1990_10_20_Berlin = Date.valueOf("1990-10-20");
 
         if (cacheDefaultTimeZone) {
             assertEquals(d_1982_04_01_MSK, this.rs.getDate(1));
@@ -11269,7 +11269,7 @@ public class StatementRegressionTest extends BaseTestCase {
 
             st1.execute("truncate table testBug98536");
 
-            java.sql.Date d1 = new java.sql.Date(prolepticGc.getTime().getTime());
+            Date d1 = new Date(prolepticGc.getTime().getTime());
 
             this.pstmt = c1.prepareStatement("insert into testBug98536 values(?,?,?)");
             this.pstmt.setDate(1, d1);
@@ -11373,7 +11373,7 @@ public class StatementRegressionTest extends BaseTestCase {
                     props.put(PropertyKey.cacheDefaultTimeZone.getKeyName(), "" + cacheDefaultTimeZone);
                     con = getConnectionWithProps(props);
                     this.pstmt = con.prepareStatement("INSERT into testBug99713 VALUES (?)");
-                    this.pstmt.setDate(1, java.sql.Date.valueOf("1982-04-01"));
+                    this.pstmt.setDate(1, Date.valueOf("1982-04-01"));
                     this.pstmt.addBatch();
                     assertEquals(1, this.pstmt.executeBatch()[0]);
                 }
@@ -11892,7 +11892,7 @@ public class StatementRegressionTest extends BaseTestCase {
             props.setProperty(PropertyKey.useServerPrepStmts.getKeyName(), Boolean.toString(useSPS));
 
             Bug101389QueryInterceptor.enabled = false; // some warnings are expected here when running against old server versions
-            java.sql.Connection testConn = getConnectionWithProps(props);
+            Connection testConn = getConnectionWithProps(props);
 
             Bug101389QueryInterceptor.enabled = true;
             Statement st = testConn.createStatement();
@@ -12304,9 +12304,9 @@ public class StatementRegressionTest extends BaseTestCase {
             props.setProperty(PropertyKey.useServerPrepStmts.getKeyName(), "" + useSPS);
             Connection testConn = getConnectionWithProps(props);
             this.pstmt = testConn.prepareStatement("insert into testBug62006 values(?)");
-            this.pstmt.setObject(1, new StringReader("test"), java.sql.Types.LONGVARCHAR, 0);
+            this.pstmt.setObject(1, new StringReader("test"), Types.LONGVARCHAR, 0);
             this.pstmt.execute();
-            this.pstmt.setObject(1, new StringReader("test"), java.sql.Types.LONGVARCHAR, 1);
+            this.pstmt.setObject(1, new StringReader("test"), Types.LONGVARCHAR, 1);
             this.pstmt.execute();
             this.pstmt.setObject(1, new StringReader("test"));
             this.pstmt.execute();

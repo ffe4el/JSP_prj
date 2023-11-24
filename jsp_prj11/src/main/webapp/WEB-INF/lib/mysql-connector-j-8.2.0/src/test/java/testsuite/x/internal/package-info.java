@@ -31,4 +31,4 @@
  * Tests for internal components of the X Protocol and X DevAPI features.
  */
 
-package testsuite.x.internal;
+package jsp_prj11.src.main.webapp.WEB;

@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.xdevapi;
+package jsp_prj11.src.main.webapp.WEB;
 
 /**
  * A result from a SQL statement which may have several sets of data following by a DML result.

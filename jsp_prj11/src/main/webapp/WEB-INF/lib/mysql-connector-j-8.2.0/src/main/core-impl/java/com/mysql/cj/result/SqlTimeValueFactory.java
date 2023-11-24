@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.result;
+package jsp_prj11.src.main.webapp.WEB;
 
 import java.sql.Time;
 import java.util.Calendar;
@@ -45,7 +45,7 @@ import com.mysql.cj.protocol.InternalTime;
 import com.mysql.cj.protocol.InternalTimestamp;
 
 /**
- * A value factory to create {@link java.sql.Time} instances. As with other date/time types, a time zone is necessary to interpret the
+ * A value factory to create {@link Time} instances. As with other date/time types, a time zone is necessary to interpret the
  * time values returned from the server.
  */
 public class SqlTimeValueFactory extends AbstractDateTimeValueFactory<Time> {

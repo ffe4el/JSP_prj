@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.conf.url;
+package jsp_prj11.src.main.webapp.WEB;
 
 import static com.mysql.cj.util.StringUtils.isNullOrEmpty;
 import static com.mysql.cj.util.StringUtils.safeTrim;
@@ -159,7 +159,7 @@ public class XDevApiConnectionUrl extends ConnectionUrl {
                 Map<Integer, List<HostInfo>> hostsByPriority = this.hosts.stream()
                         .collect(Collectors.groupingBy(hi -> Integer.valueOf(hi.getHostProperties().get(PropertyKey.PRIORITY.getKeyName()))));
                 this.hosts = hostsByPriority.entrySet().stream()
-                        .sorted(Comparator.<Map.Entry<Integer, List<HostInfo>>, Integer>comparing(Entry::getKey).reversed()).map(Entry::getValue)
+                        .sorted(Comparator.<Entry<Integer, List<HostInfo>>, Integer>comparing(Entry::getKey).reversed()).map(Entry::getValue)
                         .peek(Collections::shuffle).flatMap(List::stream).collect(Collectors.toList());
             }
         } else { // Random sorted.

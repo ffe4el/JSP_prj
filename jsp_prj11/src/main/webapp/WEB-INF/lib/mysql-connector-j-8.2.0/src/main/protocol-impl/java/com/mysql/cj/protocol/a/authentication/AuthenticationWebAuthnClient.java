@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.protocol.a.authentication;
+package jsp_prj11.src.main.webapp.WEB;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;

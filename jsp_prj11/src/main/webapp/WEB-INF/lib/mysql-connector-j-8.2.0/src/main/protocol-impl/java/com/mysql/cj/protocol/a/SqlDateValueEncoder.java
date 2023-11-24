@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.protocol.a;
+package jsp_prj11.src.main.webapp.WEB;
 
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -66,7 +66,7 @@ public class SqlDateValueEncoder extends AbstractValueEncoder {
                         : TimeUtil.getSimpleDateFormat(null, "''yyyy-MM-dd''", this.serverSession.getDefaultTimeZone()).format((Date) binding.getValue());
             case DATETIME:
             case TIMESTAMP:
-                Timestamp ts = new java.sql.Timestamp(((java.util.Date) binding.getValue()).getTime());
+                Timestamp ts = new Timestamp(((java.util.Date) binding.getValue()).getTime());
                 return binding.getCalendar() != null ? TimeUtil.getSimpleDateFormat("''yyyy-MM-dd HH:mm:ss''", binding.getCalendar()).format(ts)
                         : TimeUtil.getSimpleDateFormat(null, "''yyyy-MM-dd HH:mm:ss''",
                                 binding.getMysqlType() == MysqlType.TIMESTAMP && this.preserveInstants.getValue() ? this.serverSession.getSessionTimeZone()
@@ -108,7 +108,7 @@ public class SqlDateValueEncoder extends AbstractValueEncoder {
                                     : this.serverSession.getDefaultTimeZone(),
                             Locale.US);
                 }
-                Timestamp ts = new java.sql.Timestamp(((java.util.Date) binding.getValue()).getTime());
+                Timestamp ts = new Timestamp(((java.util.Date) binding.getValue()).getTime());
                 calendar.setTime(ts);
                 writeDateTime(msg, InternalTimestamp.from(calendar, ts.getNanos()));
                 return;

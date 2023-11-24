@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.jdbc.result;
+package jsp_prj11.src.main.webapp.WEB;
 
 import java.io.InputStream;
 import java.io.Reader;
@@ -1189,12 +1189,12 @@ public class UpdatableResultSet extends ResultSetImpl {
     }
 
     @Override
-    public void updateAsciiStream(String columnLabel, java.io.InputStream x, int length) throws SQLException {
+    public void updateAsciiStream(String columnLabel, InputStream x, int length) throws SQLException {
         updateAsciiStream(findColumn(columnLabel), x, length);
     }
 
     @Override
-    public void updateAsciiStream(int columnIndex, java.io.InputStream x, int length) throws SQLException {
+    public void updateAsciiStream(int columnIndex, InputStream x, int length) throws SQLException {
         synchronized (checkClosed().getConnectionMutex()) {
             if (!this.onInsertRow) {
                 if (!this.doingUpdates) {
@@ -1233,12 +1233,12 @@ public class UpdatableResultSet extends ResultSetImpl {
     }
 
     @Override
-    public void updateBinaryStream(String columnLabel, java.io.InputStream x, int length) throws SQLException {
+    public void updateBinaryStream(String columnLabel, InputStream x, int length) throws SQLException {
         updateBinaryStream(findColumn(columnLabel), x, length);
     }
 
     @Override
-    public void updateBinaryStream(int columnIndex, java.io.InputStream x, int length) throws SQLException {
+    public void updateBinaryStream(int columnIndex, InputStream x, int length) throws SQLException {
         synchronized (checkClosed().getConnectionMutex()) {
             if (!this.onInsertRow) {
                 if (!this.doingUpdates) {
@@ -1343,12 +1343,12 @@ public class UpdatableResultSet extends ResultSetImpl {
     }
 
     @Override
-    public void updateCharacterStream(String columnLabel, java.io.Reader reader, int length) throws SQLException {
+    public void updateCharacterStream(String columnLabel, Reader reader, int length) throws SQLException {
         updateCharacterStream(findColumn(columnLabel), reader, length);
     }
 
     @Override
-    public void updateCharacterStream(int columnIndex, java.io.Reader x, int length) throws SQLException {
+    public void updateCharacterStream(int columnIndex, Reader x, int length) throws SQLException {
         synchronized (checkClosed().getConnectionMutex()) {
             if (!this.onInsertRow) {
                 if (!this.doingUpdates) {
@@ -1370,7 +1370,7 @@ public class UpdatableResultSet extends ResultSetImpl {
     }
 
     @Override
-    public void updateClob(int columnIndex, java.sql.Clob clob) throws SQLException {
+    public void updateClob(int columnIndex, Clob clob) throws SQLException {
         synchronized (checkClosed().getConnectionMutex()) {
             if (clob == null) {
                 updateNull(columnIndex);
@@ -1684,12 +1684,12 @@ public class UpdatableResultSet extends ResultSetImpl {
     }
 
     @Override
-    public void updateTimestamp(String columnLabel, java.sql.Timestamp x) throws SQLException {
+    public void updateTimestamp(String columnLabel, Timestamp x) throws SQLException {
         updateTimestamp(findColumn(columnLabel), x);
     }
 
     @Override
-    public void updateTimestamp(int columnIndex, java.sql.Timestamp x) throws SQLException {
+    public void updateTimestamp(int columnIndex, Timestamp x) throws SQLException {
         synchronized (checkClosed().getConnectionMutex()) {
             if (!this.onInsertRow) {
                 if (!this.doingUpdates) {
@@ -1966,12 +1966,12 @@ public class UpdatableResultSet extends ResultSetImpl {
     }
 
     @Override
-    public void updateNClob(String columnLabel, java.sql.NClob nClob) throws SQLException {
+    public void updateNClob(String columnLabel, NClob nClob) throws SQLException {
         updateNClob(findColumn(columnLabel), nClob);
     }
 
     @Override
-    public void updateNClob(int columnIndex, java.sql.NClob nClob) throws SQLException {
+    public void updateNClob(int columnIndex, NClob nClob) throws SQLException {
         synchronized (checkClosed().getConnectionMutex()) {
             String fieldEncoding = this.getMetadata().getFields()[columnIndex - 1].getEncoding();
             if (fieldEncoding == null || !fieldEncoding.equals("UTF-8")) {
@@ -2121,7 +2121,7 @@ public class UpdatableResultSet extends ResultSetImpl {
     }
 
     @Override
-    public <T> T unwrap(java.lang.Class<T> iface) throws java.sql.SQLException {
+    public <T> T unwrap(Class<T> iface) throws SQLException {
         try {
             // This works for classes that aren't actually wrapping anything
             return iface.cast(this);

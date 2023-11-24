@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.jdbc.result;
+package jsp_prj11.src.main.webapp.WEB;
 
 import java.sql.ResultSetMetaData;
 
@@ -37,6 +37,6 @@ public interface CachedResultSetMetaData extends ColumnDefinition {
 
     ResultSetMetaData getMetadata();
 
-    void setMetadata(java.sql.ResultSetMetaData metadata);
+    void setMetadata(ResultSetMetaData metadata);
 
 }

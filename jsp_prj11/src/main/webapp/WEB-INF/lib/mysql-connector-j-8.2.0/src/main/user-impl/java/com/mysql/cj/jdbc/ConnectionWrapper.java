@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.jdbc;
+package jsp_prj11.src.main.webapp.WEB;
 
 import java.lang.reflect.Proxy;
 import java.sql.Blob;
@@ -242,7 +242,7 @@ public class ConnectionWrapper extends WrapperBase implements JdbcConnection {
     }
 
     @Override
-    public java.sql.Savepoint setSavepoint() throws SQLException {
+    public Savepoint setSavepoint() throws SQLException {
         if (isInGlobalTx()) {
             throw SQLError.createSQLException(Messages.getString("ConnectionWrapper.0"), MysqlErrorNumbers.SQL_STATE_INVALID_TRANSACTION_TERMINATION,
                     MysqlErrorNumbers.ER_XA_RMERR, this.exceptionInterceptor);
@@ -258,7 +258,7 @@ public class ConnectionWrapper extends WrapperBase implements JdbcConnection {
     }
 
     @Override
-    public java.sql.Savepoint setSavepoint(String arg0) throws SQLException {
+    public Savepoint setSavepoint(String arg0) throws SQLException {
         if (isInGlobalTx()) {
             throw SQLError.createSQLException(Messages.getString("ConnectionWrapper.0"), MysqlErrorNumbers.SQL_STATE_INVALID_TRANSACTION_TERMINATION,
                     MysqlErrorNumbers.ER_XA_RMERR, this.exceptionInterceptor);
@@ -294,7 +294,7 @@ public class ConnectionWrapper extends WrapperBase implements JdbcConnection {
     }
 
     @Override
-    public java.util.Map<String, Class<?>> getTypeMap() throws SQLException {
+    public Map<String, Class<?>> getTypeMap() throws SQLException {
         try {
             return this.mc.getTypeMap();
         } catch (SQLException sqlException) {
@@ -355,7 +355,7 @@ public class ConnectionWrapper extends WrapperBase implements JdbcConnection {
     }
 
     @Override
-    public java.sql.Statement createStatement() throws SQLException {
+    public Statement createStatement() throws SQLException {
         try {
             return StatementWrapper.getInstance(this, this.pooledConnection, this.mc.createStatement());
         } catch (SQLException sqlException) {
@@ -366,7 +366,7 @@ public class ConnectionWrapper extends WrapperBase implements JdbcConnection {
     }
 
     @Override
-    public java.sql.Statement createStatement(int resultSetType, int resultSetConcurrency) throws SQLException {
+    public Statement createStatement(int resultSetType, int resultSetConcurrency) throws SQLException {
         try {
             return StatementWrapper.getInstance(this, this.pooledConnection, this.mc.createStatement(resultSetType, resultSetConcurrency));
         } catch (SQLException sqlException) {
@@ -377,7 +377,7 @@ public class ConnectionWrapper extends WrapperBase implements JdbcConnection {
     }
 
     @Override
-    public java.sql.Statement createStatement(int arg0, int arg1, int arg2) throws SQLException {
+    public Statement createStatement(int arg0, int arg1, int arg2) throws SQLException {
         try {
             return StatementWrapper.getInstance(this, this.pooledConnection, this.mc.createStatement(arg0, arg1, arg2));
         } catch (SQLException sqlException) {
@@ -1032,7 +1032,7 @@ public class ConnectionWrapper extends WrapperBase implements JdbcConnection {
     }
 
     @Override
-    public synchronized <T> T unwrap(java.lang.Class<T> iface) throws java.sql.SQLException {
+    public synchronized <T> T unwrap(Class<T> iface) throws SQLException {
         try {
             if ("java.sql.Connection".equals(iface.getName()) || "java.sql.Wrapper.class".equals(iface.getName())) {
                 return iface.cast(this);

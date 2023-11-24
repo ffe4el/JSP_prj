@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.jdbc;
+package jsp_prj11.src.main.webapp.WEB;
 
 import java.lang.reflect.Proxy;
 import java.sql.Connection;
@@ -651,7 +651,7 @@ public class StatementWrapper extends WrapperBase implements Statement {
     }
 
     @Override
-    public synchronized <T> T unwrap(java.lang.Class<T> iface) throws java.sql.SQLException {
+    public synchronized <T> T unwrap(Class<T> iface) throws SQLException {
         try {
             if ("java.sql.Statement".equals(iface.getName()) || "java.sql.Wrapper.class".equals(iface.getName())) {
                 return iface.cast(this);

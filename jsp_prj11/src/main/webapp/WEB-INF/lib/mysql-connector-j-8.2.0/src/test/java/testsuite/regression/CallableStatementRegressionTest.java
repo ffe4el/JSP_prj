@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package testsuite.regression;
+package jsp_prj11.src.main.webapp.WEB;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -203,11 +203,11 @@ public class CallableStatementRegressionTest extends BaseTestCase {
         CallableStatement cstmt = db2Connection.prepareCall("{ call COMPROVAR_USUARI(?, ?, ?, ?, ?, ?) }");
         cstmt.setString(1, "abc");
         cstmt.setString(2, "def");
-        cstmt.registerOutParameter(3, java.sql.Types.INTEGER);
-        cstmt.registerOutParameter(4, java.sql.Types.VARCHAR);
-        cstmt.registerOutParameter(5, java.sql.Types.VARCHAR);
+        cstmt.registerOutParameter(3, Types.INTEGER);
+        cstmt.registerOutParameter(4, Types.VARCHAR);
+        cstmt.registerOutParameter(5, Types.VARCHAR);
 
-        cstmt.registerOutParameter(6, java.sql.Types.VARCHAR);
+        cstmt.registerOutParameter(6, Types.VARCHAR);
 
         cstmt.execute();
 
@@ -222,12 +222,12 @@ public class CallableStatementRegressionTest extends BaseTestCase {
         cstmt = db1Connection.prepareCall("{ call COMPROVAR_USUARI(?, ?, ?, ?, ?, ?) }");
         cstmt.setString(1, "abc");
         cstmt.setString(2, "def");
-        cstmt.registerOutParameter(3, java.sql.Types.INTEGER);
-        cstmt.registerOutParameter(4, java.sql.Types.VARCHAR);
-        cstmt.registerOutParameter(5, java.sql.Types.VARCHAR);
+        cstmt.registerOutParameter(3, Types.INTEGER);
+        cstmt.registerOutParameter(4, Types.VARCHAR);
+        cstmt.registerOutParameter(5, Types.VARCHAR);
 
         try {
-            cstmt.registerOutParameter(6, java.sql.Types.VARCHAR);
+            cstmt.registerOutParameter(6, Types.VARCHAR);
             fail("Should've thrown an exception");
         } catch (SQLException sqlEx) {
             assertEquals(MysqlErrorNumbers.SQL_STATE_ILLEGAL_ARGUMENT, sqlEx.getSQLState());
@@ -236,9 +236,9 @@ public class CallableStatementRegressionTest extends BaseTestCase {
         cstmt = db1Connection.prepareCall("{ call COMPROVAR_USUARI(?, ?, ?, ?, ?) }");
         cstmt.setString(1, "abc");
         cstmt.setString(2, "def");
-        cstmt.registerOutParameter(3, java.sql.Types.INTEGER);
-        cstmt.registerOutParameter(4, java.sql.Types.VARCHAR);
-        cstmt.registerOutParameter(5, java.sql.Types.VARCHAR);
+        cstmt.registerOutParameter(3, Types.INTEGER);
+        cstmt.registerOutParameter(4, Types.VARCHAR);
+        cstmt.registerOutParameter(5, Types.VARCHAR);
 
         cstmt.execute();
 
@@ -256,9 +256,9 @@ public class CallableStatementRegressionTest extends BaseTestCase {
                 "{ call " + quoteChar + db1Connection.getCatalog() + quoteChar + "." + quoteChar + "COMPROVAR_USUARI" + quoteChar + "(?, ?, ?, ?, ?) }");
         cstmt.setString(1, "abc");
         cstmt.setString(2, "def");
-        cstmt.registerOutParameter(3, java.sql.Types.INTEGER);
-        cstmt.registerOutParameter(4, java.sql.Types.VARCHAR);
-        cstmt.registerOutParameter(5, java.sql.Types.VARCHAR);
+        cstmt.registerOutParameter(3, Types.INTEGER);
+        cstmt.registerOutParameter(4, Types.VARCHAR);
+        cstmt.registerOutParameter(5, Types.VARCHAR);
 
         cstmt.execute();
 
@@ -1062,9 +1062,9 @@ public class CallableStatementRegressionTest extends BaseTestCase {
         cstmt = this.conn.prepareCall("{call Bit_Proc(?,?,?)}");
 
         System.out.println("register the output parameters");
-        cstmt.registerOutParameter(1, java.sql.Types.BIT);
-        cstmt.registerOutParameter(2, java.sql.Types.BIT);
-        cstmt.registerOutParameter(3, java.sql.Types.BIT);
+        cstmt.registerOutParameter(1, Types.BIT);
+        cstmt.registerOutParameter(2, Types.BIT);
+        cstmt.registerOutParameter(3, Types.BIT);
 
         System.out.println("execute the procedure");
         cstmt.executeUpdate();
@@ -1207,9 +1207,9 @@ public class CallableStatementRegressionTest extends BaseTestCase {
         try {
             CallableStatement callSt = conn1.prepareCall("{ call bug43576_1(?, ?, ?, ?) }");
             callSt.setString(2, "xxx");
-            callSt.registerOutParameter(1, java.sql.Types.VARCHAR);
-            callSt.registerOutParameter(3, java.sql.Types.VARCHAR);
-            callSt.registerOutParameter(4, java.sql.Types.VARCHAR);
+            callSt.registerOutParameter(1, Types.VARCHAR);
+            callSt.registerOutParameter(3, Types.VARCHAR);
+            callSt.registerOutParameter(4, Types.VARCHAR);
             callSt.execute();
 
             assertEquals("ncfact string", callSt.getString(1));
@@ -1219,9 +1219,9 @@ public class CallableStatementRegressionTest extends BaseTestCase {
             CallableStatement callSt2 = conn1.prepareCall("{ call bug43576_2(?, ?, ?, ?, ?) }");
             callSt2.setString(1, "xxx");
             callSt2.setString(2, "yyy");
-            callSt2.registerOutParameter(3, java.sql.Types.VARCHAR);
-            callSt2.registerOutParameter(4, java.sql.Types.VARCHAR);
-            callSt2.registerOutParameter(5, java.sql.Types.VARCHAR);
+            callSt2.registerOutParameter(3, Types.VARCHAR);
+            callSt2.registerOutParameter(4, Types.VARCHAR);
+            callSt2.registerOutParameter(5, Types.VARCHAR);
             callSt2.execute();
 
             assertEquals("ncfact string", callSt2.getString(3));
@@ -1231,9 +1231,9 @@ public class CallableStatementRegressionTest extends BaseTestCase {
             CallableStatement callSt3 = conn1.prepareCall("{ call bug43576_2(?, 'yyy', ?, ?, ?) }");
             callSt3.setString(1, "xxx");
             // callSt3.setString(2, "yyy");
-            callSt3.registerOutParameter(2, java.sql.Types.VARCHAR);
-            callSt3.registerOutParameter(3, java.sql.Types.VARCHAR);
-            callSt3.registerOutParameter(4, java.sql.Types.VARCHAR);
+            callSt3.registerOutParameter(2, Types.VARCHAR);
+            callSt3.registerOutParameter(3, Types.VARCHAR);
+            callSt3.registerOutParameter(4, Types.VARCHAR);
             callSt3.execute();
 
             assertEquals("ncfact string", callSt3.getString(2));
@@ -1555,11 +1555,11 @@ public class CallableStatementRegressionTest extends BaseTestCase {
         createProcedure("`abc1`.procBug20279641", "(IN c1 int, INOUT c2 int, OUT c3  int)" + " BEGIN Set c3=c2+c1; END");
 
         CallableStatement cstmt = this.conn.prepareCall("{ call `abc1`.procBug20279641(?, ?, ?) }");
-        cstmt.registerOutParameter(2, java.sql.Types.INTEGER);
-        cstmt.registerOutParameter(3, java.sql.Types.INTEGER);
+        cstmt.registerOutParameter(2, Types.INTEGER);
+        cstmt.registerOutParameter(3, Types.INTEGER);
         cstmt.setInt(1, 113);
         cstmt.setInt(2, 123);
-        cstmt.setNull(3, java.sql.Types.INTEGER);
+        cstmt.setNull(3, Types.INTEGER);
         cstmt.execute();
 
         assertEquals("123", cstmt.getString(2));
@@ -1595,13 +1595,13 @@ public class CallableStatementRegressionTest extends BaseTestCase {
                     return null;
                 });
                 callSt1.setString("inp1", "xxx");
-                callSt1.registerOutParameter(2, java.sql.Types.VARCHAR);
+                callSt1.registerOutParameter(2, Types.VARCHAR);
                 callSt1.execute();
                 assertEquals("data", callSt1.getString(2));
                 callSt1.close();
 
                 CallableStatement callSt2 = con.prepareCall("{? = CALL testBug19857166f(?,?)}");
-                callSt2.registerOutParameter(1, java.sql.Types.VARCHAR);
+                callSt2.registerOutParameter(1, Types.VARCHAR);
                 if (getProcRetFuncs) {
                     callSt2.setString("a", "abcd");
                     callSt2.setString("b", "rr");
@@ -1648,7 +1648,7 @@ public class CallableStatementRegressionTest extends BaseTestCase {
 
         CallableStatement cstmt2 = this.conn.prepareCall("{call sp_bug38954_2(?)}");
         cstmt2.setBoolean(1, true);
-        cstmt2.registerOutParameter(1, java.sql.Types.BOOLEAN);
+        cstmt2.registerOutParameter(1, Types.BOOLEAN);
         cstmt2.execute(); // was failing
         assertEquals(1, cstmt2.getUpdateCount());
         assertEquals(0, cstmt2.getByte(1));

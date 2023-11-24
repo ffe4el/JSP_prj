@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package testsuite.regression;
+package jsp_prj11.src.main.webapp.WEB;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -468,7 +468,7 @@ public class MetaDataRegressionTest extends BaseTestCase {
 
             assertTrue(this.rs.next());
 
-            assertTrue(this.rs.getInt("DATA_TYPE") == java.sql.Types.LONGVARCHAR);
+            assertTrue(this.rs.getInt("DATA_TYPE") == Types.LONGVARCHAR);
         } finally {
             this.stmt.executeUpdate("DROP TABLE IF EXISTS testLongText");
         }
@@ -1386,7 +1386,7 @@ public class MetaDataRegressionTest extends BaseTestCase {
         this.pstmt = this.conn.prepareStatement("SELECT Col1, Col2,Col4 FROM bug21267 WHERE Col1=?");
         this.pstmt.setInt(1, 1);
 
-        java.sql.ParameterMetaData psMeta = this.pstmt.getParameterMetaData();
+        ParameterMetaData psMeta = this.pstmt.getParameterMetaData();
 
         try {
             assertEquals(0, psMeta.getParameterType(1));
@@ -1827,7 +1827,7 @@ public class MetaDataRegressionTest extends BaseTestCase {
                 "(`" + gbkColumnName + "` varchar(1) default NULL, `ASCIIColumn` varchar(1) default NULL" + ")ENGINE=MyISAM DEFAULT CHARSET=utf8");
 
         this.rs = this.stmt.executeQuery("SELECT * FROM ColumnNameEncoding");
-        java.sql.ResultSetMetaData tblMD = this.rs.getMetaData();
+        ResultSetMetaData tblMD = this.rs.getMetaData();
 
         assertEquals(gbkColumnName, tblMD.getColumnName(1));
         assertEquals("ASCIIColumn", tblMD.getColumnName(2));
@@ -2561,7 +2561,7 @@ public class MetaDataRegressionTest extends BaseTestCase {
             while (this.rs.next()) {
                 String columnName = this.rs.getString(4);
                 Short columnNullable = new Short(this.rs.getShort(12));
-                assertTrue(columnNullable.intValue() == java.sql.DatabaseMetaData.procedureNullable,
+                assertTrue(columnNullable.intValue() == DatabaseMetaData.procedureNullable,
                         "Parameter " + columnName + " is not java.sql.DatabaseMetaData.procedureNullable.");
             }
         } finally {
@@ -3985,8 +3985,8 @@ public class MetaDataRegressionTest extends BaseTestCase {
         assertTrue(this.rs.next());
         assertEquals(Types.SMALLINT, rsMetaData.getColumnType(1), "YEAR columns should be treated as java.sql.Types.SMALLINT");
         assertEquals("YEAR", rsMetaData.getColumnTypeName(1), "YEAR columns should be identified as 'YEAR'");
-        assertEquals(java.lang.Short.class.getName(), rsMetaData.getColumnClassName(1), "YEAR columns should be mapped to java.lang.Short");
-        assertEquals(java.lang.Short.class.getName(), this.rs.getObject(1).getClass().getName(), "YEAR columns should be returned as java.lang.Short");
+        assertEquals(Short.class.getName(), rsMetaData.getColumnClassName(1), "YEAR columns should be mapped to java.lang.Short");
+        assertEquals(Short.class.getName(), this.rs.getObject(1).getClass().getName(), "YEAR columns should be returned as java.lang.Short");
 
         testConnection.close();
 

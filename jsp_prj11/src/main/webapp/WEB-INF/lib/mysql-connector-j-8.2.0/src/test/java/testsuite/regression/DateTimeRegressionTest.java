@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package testsuite.regression;
+package jsp_prj11.src.main.webapp.WEB;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -82,7 +82,7 @@ public class DateTimeRegressionTest extends BaseTestCase {
 
             long pointInTimeOffset = pointInTime.getTimeZone().getRawOffset();
 
-            java.sql.Timestamp ts = new java.sql.Timestamp(pointInTime.getTime().getTime());
+            Timestamp ts = new Timestamp(pointInTime.getTime().getTime());
 
             tsPstmt.setTimestamp(1, ts);
             tsPstmt.executeUpdate();

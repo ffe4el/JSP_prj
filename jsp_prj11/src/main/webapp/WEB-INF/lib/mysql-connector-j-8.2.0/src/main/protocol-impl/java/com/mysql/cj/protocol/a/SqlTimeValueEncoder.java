@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.protocol.a;
+package jsp_prj11.src.main.webapp.WEB;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -63,7 +63,7 @@ public class SqlTimeValueEncoder extends AbstractValueEncoder {
 
         switch (binding.getMysqlType()) {
             case DATE:
-                Date d = new java.sql.Date(x.getTime());
+                Date d = new Date(x.getTime());
                 return binding.getCalendar() != null ? TimeUtil.getSimpleDateFormat("''yyyy-MM-dd''", binding.getCalendar()).format(d)
                         : TimeUtil.getSimpleDateFormat(null, "''yyyy-MM-dd''", this.serverSession.getDefaultTimeZone()).format(d);
             case TIME:
@@ -125,7 +125,7 @@ public class SqlTimeValueEncoder extends AbstractValueEncoder {
                 return;
             case DATETIME:
             case TIMESTAMP:
-                java.sql.Timestamp ts = new java.sql.Timestamp(((java.sql.Time) binding.getValue()).getTime());
+                java.sql.Timestamp ts = new java.sql.Timestamp(((Time) binding.getValue()).getTime());
                 if (!this.serverSession.getCapabilities().serverSupportsFracSecs() || !this.sendFractionalSeconds.getValue()
                         || !this.sendFractionalSecondsForTime.getValue()) {
                     ts = TimeUtil.truncateFractionalSeconds(ts);

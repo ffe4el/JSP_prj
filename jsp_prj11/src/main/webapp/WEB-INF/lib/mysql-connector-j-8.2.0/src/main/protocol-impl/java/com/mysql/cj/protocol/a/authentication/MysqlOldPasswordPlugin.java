@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.protocol.a.authentication;
+package jsp_prj11.src.main.webapp.WEB;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -133,14 +133,14 @@ public class MysqlOldPasswordPlugin implements AuthenticationPlugin<NativePacket
             seed1 = (seed1 * 3 + seed2) % max;
             seed2 = (seed1 + seed2 + 33) % max;
             d = (double) seed1 / (double) max;
-            b = (byte) java.lang.Math.floor(d * 31 + 64);
+            b = (byte) Math.floor(d * 31 + 64);
             chars[i] = (char) b;
         }
 
         seed1 = (seed1 * 3 + seed2) % max;
         seed2 = (seed1 + seed2 + 33) % max;
         d = (double) seed1 / (double) max;
-        b = (byte) java.lang.Math.floor(d * 31);
+        b = (byte) Math.floor(d * 31);
 
         for (int i = 0; i < seed.length(); i++) {
             chars[i] ^= (char) b;

@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.jdbc;
+package jsp_prj11.src.main.webapp.WEB;
 
 import java.io.InputStream;
 import java.io.Reader;
@@ -1498,7 +1498,7 @@ public class ClientPreparedStatement extends com.mysql.cj.jdbc.StatementImpl imp
     }
 
     @Override
-    public void setDate(int parameterIndex, Date x) throws java.sql.SQLException {
+    public void setDate(int parameterIndex, Date x) throws SQLException {
         synchronized (checkClosed().getConnectionMutex()) {
             ((PreparedQuery) this.query).getQueryBindings().setDate(getCoreParameterIndex(parameterIndex), x, null);
         }
@@ -1709,28 +1709,28 @@ public class ClientPreparedStatement extends com.mysql.cj.jdbc.StatementImpl imp
     }
 
     @Override
-    public void setTime(int parameterIndex, Time x) throws java.sql.SQLException {
+    public void setTime(int parameterIndex, Time x) throws SQLException {
         synchronized (checkClosed().getConnectionMutex()) {
             ((PreparedQuery) this.query).getQueryBindings().setTime(getCoreParameterIndex(parameterIndex), x, null);
         }
     }
 
     @Override
-    public void setTime(int parameterIndex, java.sql.Time x, Calendar cal) throws SQLException {
+    public void setTime(int parameterIndex, Time x, Calendar cal) throws SQLException {
         synchronized (checkClosed().getConnectionMutex()) {
             ((PreparedQuery) this.query).getQueryBindings().setTime(getCoreParameterIndex(parameterIndex), x, cal);
         }
     }
 
     @Override
-    public void setTimestamp(int parameterIndex, Timestamp x) throws java.sql.SQLException {
+    public void setTimestamp(int parameterIndex, Timestamp x) throws SQLException {
         synchronized (checkClosed().getConnectionMutex()) {
             ((PreparedQuery) this.query).getQueryBindings().setTimestamp(getCoreParameterIndex(parameterIndex), x, null, null, MysqlType.TIMESTAMP);
         }
     }
 
     @Override
-    public void setTimestamp(int parameterIndex, java.sql.Timestamp x, Calendar cal) throws SQLException {
+    public void setTimestamp(int parameterIndex, Timestamp x, Calendar cal) throws SQLException {
         synchronized (checkClosed().getConnectionMutex()) {
             ((PreparedQuery) this.query).getQueryBindings().setTimestamp(getCoreParameterIndex(parameterIndex), x, cal, null, MysqlType.TIMESTAMP);
         }

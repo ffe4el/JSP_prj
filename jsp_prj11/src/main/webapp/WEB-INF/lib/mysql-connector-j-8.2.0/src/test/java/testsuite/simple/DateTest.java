@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package testsuite.simple;
+package jsp_prj11.src.main.webapp.WEB;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -83,9 +83,9 @@ public class DateTest extends BaseTestCase {
         Calendar calGMT = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
         // df.setTimeZone(TimeZone.getTimeZone("GMT"));
         Timestamp nowTstamp = new Timestamp(cal.getTime().getTime());
-        java.sql.Date nowDate = new java.sql.Date(cal.getTime().getTime());
+        Date nowDate = new Date(cal.getTime().getTime());
         Timestamp nowDatetime = new Timestamp(cal.getTime().getTime());
-        java.sql.Time nowTime = new java.sql.Time(cal.getTime().getTime());
+        Time nowTime = new Time(cal.getTime().getTime());
         System.out.println("** Times with given calendar (before storing) **\n");
         System.out.println("TIMESTAMP:\t" + nowTstamp.getTime() + " -> " + df.format(nowTstamp));
         System.out.println("DATE:\t\t" + nowDate.getTime() + " -> " + df.format(nowDate));
@@ -107,15 +107,15 @@ public class DateTest extends BaseTestCase {
         this.pstmt.clearParameters();
         this.rs = this.stmt.executeQuery("SELECT * from DATETEST");
 
-        java.sql.Date thenDate = null;
+        Date thenDate = null;
 
         while (this.rs.next()) {
             Timestamp thenTstamp = this.rs.getTimestamp(1, calGMT);
             thenDate = this.rs.getDate(2, cal);
 
-            java.sql.Timestamp thenDatetime = this.rs.getTimestamp(3, calGMT);
+            Timestamp thenDatetime = this.rs.getTimestamp(3, calGMT);
 
-            java.sql.Time thenTime = this.rs.getTime(4, cal);
+            Time thenTime = this.rs.getTime(4, cal);
             System.out.println("** Times with given calendar (retrieved from database) **\n");
             System.out.println("TIMESTAMP:\t" + thenTstamp.getTime() + " -> " + df.format(thenTstamp));
             System.out.println("DATE:\t\t" + thenDate.getTime() + " -> " + df.format(thenDate));

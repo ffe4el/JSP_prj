@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.jdbc;
+package jsp_prj11.src.main.webapp.WEB;
 
 import java.io.InputStream;
 import java.io.Reader;
@@ -1764,7 +1764,7 @@ public class CallableStatementWrapper extends PreparedStatementWrapper implement
     }
 
     @Override
-    public synchronized <T> T unwrap(java.lang.Class<T> iface) throws java.sql.SQLException {
+    public synchronized <T> T unwrap(Class<T> iface) throws SQLException {
         try {
             if ("java.sql.Statement".equals(iface.getName()) || "java.sql.CallableStatement".equals(iface.getName())
                     || "java.sql.PreparedStatement".equals(iface.getName()) || "java.sql.Wrapper.class".equals(iface.getName())) {

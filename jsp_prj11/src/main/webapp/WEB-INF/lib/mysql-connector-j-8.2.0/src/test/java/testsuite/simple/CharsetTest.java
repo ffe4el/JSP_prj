@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package testsuite.simple;
+package jsp_prj11.src.main.webapp.WEB;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -272,7 +272,7 @@ public class CharsetTest extends BaseTestCase {
         Iterator<String> i1 = k.iterator();
         while (i1.hasNext()) {
             String canonicalName = i1.next();
-            java.nio.charset.Charset cs = availableCharsets.get(canonicalName);
+            Charset cs = availableCharsets.get(canonicalName);
             canonicalName = cs.name();
 
             int index = CharsetMappingWrapper.getStaticCollationIndexForJavaEncoding(canonicalName, this.serverVersion);

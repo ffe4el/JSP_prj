@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.protocol;
+package jsp_prj11.src.main.webapp.WEB;
 
 import java.io.Closeable;
 import java.io.FileNotFoundException;
@@ -91,7 +91,7 @@ public class NamedPipeSocketFactory implements SocketFactory {
         }
 
         /**
-         * @see java.net.Socket#close()
+         * @see Socket#close()
          */
         @Override
         public synchronized void close() throws IOException {
@@ -100,7 +100,7 @@ public class NamedPipeSocketFactory implements SocketFactory {
         }
 
         /**
-         * @see java.net.Socket#getInputStream()
+         * @see Socket#getInputStream()
          */
         @Override
         public InputStream getInputStream() throws IOException {
@@ -108,7 +108,7 @@ public class NamedPipeSocketFactory implements SocketFactory {
         }
 
         /**
-         * @see java.net.Socket#getOutputStream()
+         * @see Socket#getOutputStream()
          */
         @Override
         public OutputStream getOutputStream() throws IOException {
@@ -116,7 +116,7 @@ public class NamedPipeSocketFactory implements SocketFactory {
         }
 
         /**
-         * @see java.net.Socket#isClosed()
+         * @see Socket#isClosed()
          */
         @Override
         public boolean isClosed() {
@@ -142,7 +142,7 @@ public class NamedPipeSocketFactory implements SocketFactory {
         }
 
         /**
-         * @see java.io.InputStream#available()
+         * @see InputStream#available()
          */
         @Override
         public int available() throws IOException {
@@ -150,7 +150,7 @@ public class NamedPipeSocketFactory implements SocketFactory {
         }
 
         /**
-         * @see java.io.InputStream#close()
+         * @see InputStream#close()
          */
         @Override
         public void close() throws IOException {
@@ -158,7 +158,7 @@ public class NamedPipeSocketFactory implements SocketFactory {
         }
 
         /**
-         * @see java.io.InputStream#read()
+         * @see InputStream#read()
          */
         @Override
         public int read() throws IOException {
@@ -166,7 +166,7 @@ public class NamedPipeSocketFactory implements SocketFactory {
         }
 
         /**
-         * @see java.io.InputStream#read(byte[])
+         * @see InputStream#read(byte[])
          */
         @Override
         public int read(byte[] b) throws IOException {
@@ -174,7 +174,7 @@ public class NamedPipeSocketFactory implements SocketFactory {
         }
 
         /**
-         * @see java.io.InputStream#read(byte[], int, int)
+         * @see InputStream#read(byte[], int, int)
          */
         @Override
         public int read(byte[] b, int off, int len) throws IOException {
@@ -195,7 +195,7 @@ public class NamedPipeSocketFactory implements SocketFactory {
         }
 
         /**
-         * @see java.io.OutputStream#close()
+         * @see OutputStream#close()
          */
         @Override
         public void close() throws IOException {
@@ -203,7 +203,7 @@ public class NamedPipeSocketFactory implements SocketFactory {
         }
 
         /**
-         * @see java.io.OutputStream#write(byte[])
+         * @see OutputStream#write(byte[])
          */
         @Override
         public void write(byte[] b) throws IOException {
@@ -211,7 +211,7 @@ public class NamedPipeSocketFactory implements SocketFactory {
         }
 
         /**
-         * @see java.io.OutputStream#write(byte[], int, int)
+         * @see OutputStream#write(byte[], int, int)
          */
         @Override
         public void write(byte[] b, int off, int len) throws IOException {
@@ -219,7 +219,7 @@ public class NamedPipeSocketFactory implements SocketFactory {
         }
 
         /**
-         * @see java.io.OutputStream#write(int)
+         * @see OutputStream#write(int)
          */
         @Override
         public void write(int b) throws IOException {

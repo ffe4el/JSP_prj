@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package testsuite.simple;
+package jsp_prj11.src.main.webapp.WEB;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -124,10 +124,10 @@ public class StatementsTest extends BaseTestCase {
 
         accessorStmt.setCursorName("undef");
         accessorStmt.setEscapeProcessing(true);
-        accessorStmt.setFetchDirection(java.sql.ResultSet.FETCH_FORWARD);
+        accessorStmt.setFetchDirection(ResultSet.FETCH_FORWARD);
 
         int fetchDirection = accessorStmt.getFetchDirection();
-        assertTrue(fetchDirection == java.sql.ResultSet.FETCH_FORWARD, "Set fetch direction != get fetch direction");
+        assertTrue(fetchDirection == ResultSet.FETCH_FORWARD, "Set fetch direction != get fetch direction");
 
         assertThrows("Should not be able to set fetch direction to invalid value", SQLException.class, () -> {
             accessorStmt.setFetchDirection(Integer.MAX_VALUE);
@@ -1127,7 +1127,7 @@ public class StatementsTest extends BaseTestCase {
         this.pstmt.setObject(4, new java.util.Date(currentTime), Types.DATE);
         this.pstmt.setObject(5, "2000-01-01 23-59-59", Types.TIMESTAMP);
         this.pstmt.setObject(6, "11:22:33", Types.TIME);
-        this.pstmt.setObject(7, new java.sql.Timestamp(currentTime), Types.TIME);
+        this.pstmt.setObject(7, new Timestamp(currentTime), Types.TIME);
         this.pstmt.execute();
         this.rs = stmt1.executeQuery("SELECT * FROM t1");
         this.rs.next();
@@ -1136,12 +1136,12 @@ public class StatementsTest extends BaseTestCase {
         assertEquals("2000", this.rs.getString(2));
         assertEquals(1, ((byte[]) this.rs.getObject(3)).length);
         assertEquals(0, ((byte[]) this.rs.getObject(3))[0]);
-        assertEquals(new java.sql.Date(currentTime).toString(), this.rs.getDate(4).toString());
+        assertEquals(new Date(currentTime).toString(), this.rs.getDate(4).toString());
 
         assertEquals("2000-01-01 23:59:59", this.rs.getString(5));
 
         assertEquals("11:22:33", this.rs.getString(6));
-        assertEquals(new java.sql.Time(currentTime).toString(), this.rs.getString(7));
+        assertEquals(new Time(currentTime).toString(), this.rs.getString(7));
     }
 
     /**
@@ -1175,7 +1175,7 @@ public class StatementsTest extends BaseTestCase {
         this.pstmt.setObject(4, new java.util.Date(currentTime), MysqlType.DATE);
         this.pstmt.setObject(5, "2000-01-01 23-59-59", MysqlType.TIMESTAMP);
         this.pstmt.setObject(6, "11:22:33", MysqlType.TIME);
-        this.pstmt.setObject(7, new java.sql.Timestamp(currentTime), MysqlType.TIME);
+        this.pstmt.setObject(7, new Timestamp(currentTime), MysqlType.TIME);
         this.pstmt.execute();
 
         this.pstmt.setObject(1, null, MysqlType.DECIMAL);
@@ -1194,10 +1194,10 @@ public class StatementsTest extends BaseTestCase {
         assertEquals("2000", this.rs.getString(2));
         assertEquals(1, ((byte[]) this.rs.getObject(3)).length);
         assertEquals(0, ((byte[]) this.rs.getObject(3))[0]);
-        assertEquals(new java.sql.Date(currentTime).toString(), this.rs.getDate(4).toString());
+        assertEquals(new Date(currentTime).toString(), this.rs.getDate(4).toString());
         assertEquals("2000-01-01 23:59:59", this.rs.getString(5));
         assertEquals("11:22:33", this.rs.getString(6));
-        assertEquals(new java.sql.Time(currentTime).toString(), this.rs.getString(7));
+        assertEquals(new Time(currentTime).toString(), this.rs.getString(7));
 
         this.rs.next();
         assertEquals(null, this.rs.getString(1));
@@ -1421,7 +1421,7 @@ public class StatementsTest extends BaseTestCase {
 
                             assertEquals(buf.toString(), asString, "On row " + idx + ", column " + (k + 1));
 
-                        } else if (differentTypes[idx][k] instanceof java.io.InputStream) {
+                        } else if (differentTypes[idx][k] instanceof InputStream) {
                             ByteArrayOutputStream bOut = new ByteArrayOutputStream();
 
                             int bytesRead = 0;

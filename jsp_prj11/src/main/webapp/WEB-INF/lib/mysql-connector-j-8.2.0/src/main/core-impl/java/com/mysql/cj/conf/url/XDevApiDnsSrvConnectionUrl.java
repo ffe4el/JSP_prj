@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.conf.url;
+package jsp_prj11.src.main.webapp.WEB;
 
 import static com.mysql.cj.util.StringUtils.isNullOrEmpty;
 import static com.mysql.cj.util.StringUtils.safeTrim;

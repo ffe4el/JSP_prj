@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.jdbc.result;
+package jsp_prj11.src.main.webapp.WEB;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -158,7 +158,7 @@ public class ResultSetImpl extends NativeResultset implements ResultSetInternalM
     protected boolean isClosed = false;
 
     /** The statement that created us */
-    private com.mysql.cj.jdbc.StatementImpl owningStatement;
+    private StatementImpl owningStatement;
 
     /**
      * StackTrace generated where ResultSet was created... used when profiling
@@ -180,7 +180,7 @@ public class ResultSetImpl extends NativeResultset implements ResultSetInternalM
     protected boolean scrollTolerant = false;
 
     /** The warning chain */
-    protected java.sql.SQLWarning warningChain = null;
+    protected SQLWarning warningChain = null;
 
     protected java.sql.Statement wrapperStatement;
 
@@ -765,7 +765,7 @@ public class ResultSetImpl extends NativeResultset implements ResultSetInternalM
             return null;
         }
 
-        return new com.mysql.cj.jdbc.Clob(asString, getExceptionInterceptor());
+        return new Clob(asString, getExceptionInterceptor());
     }
 
     @Override
@@ -1291,7 +1291,7 @@ public class ResultSetImpl extends NativeResultset implements ResultSetInternalM
                 Timestamp ts = getTimestamp(columnIndex);
                 return ts == null ? null : (T) java.util.Date.from(ts.toInstant());
 
-            } else if (type.equals(java.util.Calendar.class)) {
+            } else if (type.equals(Calendar.class)) {
                 return (T) getUtilCalendar(columnIndex);
 
             } else if (type.equals(Clob.class)) {
@@ -1509,13 +1509,13 @@ public class ResultSetImpl extends NativeResultset implements ResultSetInternalM
     }
 
     @Override
-    public java.sql.Ref getRef(int i) throws SQLException {
+    public Ref getRef(int i) throws SQLException {
         checkColumnBounds(i);
         throw SQLError.createSQLFeatureNotSupportedException();
     }
 
     @Override
-    public java.sql.Ref getRef(String colName) throws SQLException {
+    public Ref getRef(String colName) throws SQLException {
         return getRef(findColumn(colName));
     }
 
@@ -1615,7 +1615,7 @@ public class ResultSetImpl extends NativeResultset implements ResultSetInternalM
     }
 
     @Override
-    public java.sql.SQLWarning getWarnings() throws SQLException {
+    public SQLWarning getWarnings() throws SQLException {
         synchronized (checkClosed().getConnectionMutex()) {
             return this.warningChain;
         }
@@ -1762,10 +1762,10 @@ public class ResultSetImpl extends NativeResultset implements ResultSetInternalM
      *
      * @return true if the new current is valid; false if there are no more rows
      *
-     * @exception java.sql.SQLException
+     * @exception SQLException
      *                if a database access error occurs
      */
-    public boolean prev() throws java.sql.SQLException {
+    public boolean prev() throws SQLException {
         synchronized (checkClosed().getConnectionMutex()) {
 
             int rowIndex = this.rowData.getPosition();
@@ -2291,12 +2291,12 @@ public class ResultSetImpl extends NativeResultset implements ResultSetInternalM
     }
 
     @Override
-    public void updateDate(int columnIndex, java.sql.Date x) throws SQLException {
+    public void updateDate(int columnIndex, Date x) throws SQLException {
         throw new NotUpdatable(Messages.getString("NotUpdatable.0"));
     }
 
     @Override
-    public void updateDate(String columnName, java.sql.Date x) throws SQLException {
+    public void updateDate(String columnName, Date x) throws SQLException {
         throw new NotUpdatable(Messages.getString("NotUpdatable.0"));
     }
 
@@ -2506,22 +2506,22 @@ public class ResultSetImpl extends NativeResultset implements ResultSetInternalM
     }
 
     @Override
-    public void updateTime(int columnIndex, java.sql.Time x) throws SQLException {
+    public void updateTime(int columnIndex, Time x) throws SQLException {
         throw new NotUpdatable(Messages.getString("NotUpdatable.0"));
     }
 
     @Override
-    public void updateTime(String columnName, java.sql.Time x) throws SQLException {
+    public void updateTime(String columnName, Time x) throws SQLException {
         throw new NotUpdatable(Messages.getString("NotUpdatable.0"));
     }
 
     @Override
-    public void updateTimestamp(int columnIndex, java.sql.Timestamp x) throws SQLException {
+    public void updateTimestamp(int columnIndex, Timestamp x) throws SQLException {
         throw new NotUpdatable(Messages.getString("NotUpdatable.0"));
     }
 
     @Override
-    public void updateTimestamp(String columnName, java.sql.Timestamp x) throws SQLException {
+    public void updateTimestamp(String columnName, Timestamp x) throws SQLException {
         throw new NotUpdatable(Messages.getString("NotUpdatable.0"));
     }
 
@@ -2570,7 +2570,7 @@ public class ResultSetImpl extends NativeResultset implements ResultSetInternalM
     }
 
     @Override
-    public <T> T unwrap(java.lang.Class<T> iface) throws java.sql.SQLException {
+    public <T> T unwrap(Class<T> iface) throws SQLException {
         try {
             // This works for classes that aren't actually wrapping anything
             return iface.cast(this);
@@ -2597,7 +2597,7 @@ public class ResultSetImpl extends NativeResultset implements ResultSetInternalM
         return this.columnDefinition;
     }
 
-    public com.mysql.cj.jdbc.StatementImpl getOwningStatement() {
+    public StatementImpl getOwningStatement() {
         return this.owningStatement;
     }
 

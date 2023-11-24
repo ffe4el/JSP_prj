@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.jdbc.result;
+package jsp_prj11.src.main.webapp.WEB;
 
 import java.sql.SQLException;
 import java.sql.Types;
@@ -194,7 +194,7 @@ public class ResultSetMetaData implements java.sql.ResultSetMetaData {
     }
 
     @Override
-    public String getColumnTypeName(int column) throws java.sql.SQLException {
+    public String getColumnTypeName(int column) throws SQLException {
         Field field = getField(column);
         return field.getMysqlType().getName();
     }
@@ -272,7 +272,7 @@ public class ResultSetMetaData implements java.sql.ResultSetMetaData {
     }
 
     @Override
-    public boolean isCaseSensitive(int column) throws java.sql.SQLException {
+    public boolean isCaseSensitive(int column) throws SQLException {
         Field field = getField(column);
 
         switch (field.getMysqlType()) {

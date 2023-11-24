@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.protocol.x;
+package jsp_prj11.src.main.webapp.WEB;
 
 import static com.mysql.cj.protocol.x.XMessageHeader.HEADER_LENGTH;
 
@@ -119,7 +119,7 @@ public class CompressionSplittedOutputStream extends FilterOutputStream {
      * Analyzes the given bytes as an X Protocol frame and, depending on its size, writes it as-is in the underlying {@link OutputStream} or rebuilds it as a
      * compressed X Protocol packet.
      *
-     * @see java.io.FilterOutputStream#write(int)
+     * @see FilterOutputStream#write(int)
      */
     @Override
     public void write(byte[] b, int off, int len) throws IOException {

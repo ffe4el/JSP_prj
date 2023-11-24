@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package testsuite.regression;
+package jsp_prj11.src.main.webapp.WEB;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -1025,7 +1025,7 @@ public class ConnectionRegressionTest extends BaseTestCase {
                                     getMethods[i].invoke(this.rs, new Object[] { new Integer(1) });
                                 } catch (InvocationTargetException invokeEx) {
                                     // we don't care about bad values, just that the column gets "touched"
-                                    if (!invokeEx.getCause().getClass().isAssignableFrom(java.sql.SQLException.class)
+                                    if (!invokeEx.getCause().getClass().isAssignableFrom(SQLException.class)
                                             && !invokeEx.getCause().getClass().getName().equals("com.mysql.jdbc.NotImplemented")
                                             && !invokeEx.getCause().getClass().getName().equals("java.sql.SQLFeatureNotSupportedException")) {
                                         throw invokeEx;
@@ -1717,7 +1717,7 @@ public class ConnectionRegressionTest extends BaseTestCase {
      */
     @Test
     public void testBug34703() throws Exception {
-        Method isValid = java.sql.Connection.class.getMethod("isValid", new Class<?>[] { Integer.TYPE });
+        Method isValid = Connection.class.getMethod("isValid", new Class<?>[] { Integer.TYPE });
 
         Properties props = new Properties();
         props.setProperty(PropertyKey.sslMode.getKeyName(), SslMode.DISABLED.name());
@@ -2488,7 +2488,7 @@ public class ConnectionRegressionTest extends BaseTestCase {
 
         StringBuilder configs = new StringBuilder();
         for (@SuppressWarnings("rawtypes")
-        Map.Entry entry : props.entrySet()) {
+        Entry entry : props.entrySet()) {
             configs.append(entry.getKey());
             configs.append("=");
             configs.append(entry.getValue());
@@ -4478,7 +4478,7 @@ public class ConnectionRegressionTest extends BaseTestCase {
 
         StringBuilder configs = new StringBuilder();
         for (@SuppressWarnings("rawtypes")
-        Map.Entry entry : props.entrySet()) {
+        Entry entry : props.entrySet()) {
             configs.append(entry.getKey());
             configs.append("=");
             configs.append(entry.getValue());
@@ -5035,7 +5035,7 @@ public class ConnectionRegressionTest extends BaseTestCase {
             c2.close();
 
         } catch (SQLException e) {
-            assertFalse(e.getCause() instanceof java.lang.ArrayIndexOutOfBoundsException, "e.getCause() instanceof java.lang.ArrayIndexOutOfBoundsException");
+            assertFalse(e.getCause() instanceof ArrayIndexOutOfBoundsException, "e.getCause() instanceof java.lang.ArrayIndexOutOfBoundsException");
 
             props.setProperty(PropertyKey.characterEncoding.getKeyName(), "UTF-8");
             props.setProperty(PropertyKey.USER.getKeyName(), "\u30C6\u30B9\u30C8\u30C6\u30B9\u30C8");
@@ -5741,7 +5741,7 @@ public class ConnectionRegressionTest extends BaseTestCase {
 
         StringBuilder configs = new StringBuilder();
         for (@SuppressWarnings("rawtypes")
-        Map.Entry entry : props.entrySet()) {
+        Entry entry : props.entrySet()) {
             configs.append(entry.getKey());
             configs.append("=");
             configs.append(entry.getValue());
@@ -6002,7 +6002,7 @@ public class ConnectionRegressionTest extends BaseTestCase {
         @SuppressWarnings("unchecked")
         @Override
         public <T extends Closeable> T connect(String hostname, int portNumber, PropertySet props, int loginTimeout) throws IOException {
-            return (T) (this.rawSocket = new ConnectionRegressionTest.TestBug73053SocketWrapper(super.connect(hostname, portNumber, props, loginTimeout)));
+            return (T) (this.rawSocket = new TestBug73053SocketWrapper(super.connect(hostname, portNumber, props, loginTimeout)));
         }
 
     }
@@ -6072,7 +6072,7 @@ public class ConnectionRegressionTest extends BaseTestCase {
 
         @Override
         public InputStream getInputStream() throws IOException {
-            return new ConnectionRegressionTest.TestBug73053InputStreamWrapper(this.underlyingSocket.getInputStream());
+            return new TestBug73053InputStreamWrapper(this.underlyingSocket.getInputStream());
         }
 
         @Override
@@ -9985,7 +9985,7 @@ public class ConnectionRegressionTest extends BaseTestCase {
         props.setProperty(PropertyKey.allowPublicKeyRetrieval.getKeyName(), "true");
         props.setProperty(PropertyKey.queryInterceptors.getKeyName(), Bug88227QueryInterceptor.class.getName());
         Bug88227QueryInterceptor.enabled = false; // some warnings are expected here when running against old server versions
-        java.sql.Connection testConn = getConnectionWithProps(props);
+        Connection testConn = getConnectionWithProps(props);
         Bug88227QueryInterceptor.enabled = true;
         testConn.getTransactionIsolation();
         testConn.isReadOnly();

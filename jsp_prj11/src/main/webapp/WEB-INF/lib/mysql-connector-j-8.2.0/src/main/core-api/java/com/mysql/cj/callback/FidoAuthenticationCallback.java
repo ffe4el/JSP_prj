@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.callback;
+package jsp_prj11.src.main.webapp.WEB;
 
 /**
  * The callback object used by the authentication plugin AuthenticationFidoClient to exchange authenticator data between the driver and the client application.

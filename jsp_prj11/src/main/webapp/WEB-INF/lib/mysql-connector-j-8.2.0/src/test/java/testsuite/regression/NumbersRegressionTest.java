@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package testsuite.regression;
+package jsp_prj11.src.main.webapp.WEB;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -190,7 +190,7 @@ public class NumbersRegressionTest extends BaseTestCase {
         this.rs = this.stmt.executeQuery("SELECT * FROM testIntRetLong");
         this.rs.next();
 
-        assertTrue(this.rs.getObject(1).getClass().equals(java.lang.Integer.class));
+        assertTrue(this.rs.getObject(1).getClass().equals(Integer.class));
     }
 
     /**

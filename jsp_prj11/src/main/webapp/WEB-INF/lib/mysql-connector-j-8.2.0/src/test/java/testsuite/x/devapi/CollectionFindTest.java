@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package testsuite.x.devapi;
+package jsp_prj11.src.main.webapp.WEB;
 
 import static com.mysql.cj.xdevapi.Expression.expr;
 import static org.hamcrest.CoreMatchers.hasItems;
@@ -137,7 +137,7 @@ public class CollectionFindTest extends BaseCollectionTestCase {
     }
 
     /**
-     * Test that {@link DocResult} implements {@link java.lang.Iterable}.
+     * Test that {@link DocResult} implements {@link Iterable}.
      */
     @Test
     public void testIterable() {
@@ -3841,7 +3841,7 @@ public class CollectionFindTest extends BaseCollectionTestCase {
 
         final CompletableFuture<DocResult> asyncDocs = this.collection.find("F3 > ? and F3 < ?").bind(102, 106).fields(expr("{'_id':$._id,'X':sleep(1)}"))
                 .executeAsync();
-        assertThrows(java.util.concurrent.TimeoutException.class, () -> asyncDocs.get(2, TimeUnit.SECONDS));
+        assertThrows(TimeoutException.class, () -> asyncDocs.get(2, TimeUnit.SECONDS));
     }
 
     @Test

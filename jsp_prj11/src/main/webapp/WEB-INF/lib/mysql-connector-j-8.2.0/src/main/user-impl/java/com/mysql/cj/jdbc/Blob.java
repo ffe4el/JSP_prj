@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.jdbc;
+package jsp_prj11.src.main.webapp.WEB;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -107,7 +107,7 @@ public class Blob implements java.sql.Blob, OutputStreamWatcher {
     }
 
     @Override
-    public synchronized java.io.InputStream getBinaryStream() throws SQLException {
+    public synchronized InputStream getBinaryStream() throws SQLException {
         checkClosed();
 
         return new ByteArrayInputStream(getBinaryData());

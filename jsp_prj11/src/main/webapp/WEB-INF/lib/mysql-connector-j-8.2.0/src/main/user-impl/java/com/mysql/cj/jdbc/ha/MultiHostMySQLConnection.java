@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.jdbc.ha;
+package jsp_prj11.src.main.webapp.WEB;
 
 import java.sql.Blob;
 import java.sql.CallableStatement;
@@ -703,7 +703,7 @@ public class MultiHostMySQLConnection implements JdbcConnection {
     }
 
     @Override
-    public <T> T unwrap(java.lang.Class<T> iface) throws java.sql.SQLException {
+    public <T> T unwrap(Class<T> iface) throws SQLException {
         try {
             // This works for classes that aren't actually wrapping anything
             return iface.cast(this);

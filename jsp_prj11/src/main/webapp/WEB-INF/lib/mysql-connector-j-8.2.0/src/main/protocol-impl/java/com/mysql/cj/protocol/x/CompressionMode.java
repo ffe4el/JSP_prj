@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.protocol.x;
+package jsp_prj11.src.main.webapp.WEB;
 
 /**
  * The modes by which compression can be made. In message mode each X Protocol message is compressed independently of the others; in stream mode all messages

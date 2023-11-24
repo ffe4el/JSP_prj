@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.jdbc;
+package jsp_prj11.src.main.webapp.WEB;
 
 import java.io.InputStream;
 import java.io.Reader;
@@ -192,7 +192,7 @@ public class CallableStatement extends ClientPreparedStatement implements java.s
         }
 
         @SuppressWarnings("synthetic-access")
-        CallableStatementParamInfo(java.sql.ResultSet paramTypesRs) throws SQLException {
+        CallableStatementParamInfo(ResultSet paramTypesRs) throws SQLException {
             boolean hadRows = paramTypesRs.last();
 
             this.nativeSql = ((PreparedQuery) CallableStatement.this.query).getOriginalSql();
@@ -217,7 +217,7 @@ public class CallableStatement extends ClientPreparedStatement implements java.s
             }
         }
 
-        private void addParametersFromDBMD(java.sql.ResultSet paramTypesRs) throws SQLException {
+        private void addParametersFromDBMD(ResultSet paramTypesRs) throws SQLException {
             int i = 0;
 
             while (paramTypesRs.next()) {
@@ -391,7 +391,7 @@ public class CallableStatement extends ClientPreparedStatement implements java.s
         }
 
         @Override
-        public <T> T unwrap(Class<T> iface) throws java.sql.SQLException {
+        public <T> T unwrap(Class<T> iface) throws SQLException {
             try {
                 // This works for classes that aren't actually wrapping anything
                 return iface.cast(this);
@@ -757,7 +757,7 @@ public class CallableStatement extends ClientPreparedStatement implements java.s
                 resultRows.add(new ByteArrayRow(row, getExceptionInterceptor()));
             }
 
-            java.sql.ResultSet paramTypesRs = this.resultSetFactory.createFromResultsetRows(ResultSet.CONCUR_READ_ONLY, ResultSet.TYPE_SCROLL_INSENSITIVE,
+            ResultSet paramTypesRs = this.resultSetFactory.createFromResultsetRows(ResultSet.CONCUR_READ_ONLY, ResultSet.TYPE_SCROLL_INSENSITIVE,
                     new ResultsetRowsStatic(resultRows, new DefaultColumnDefinition(fields)));
 
             convertGetProcedureColumnsToInternalDescriptors(paramTypesRs);
@@ -766,7 +766,7 @@ public class CallableStatement extends ClientPreparedStatement implements java.s
 
     private void determineParameterTypes() throws SQLException {
         synchronized (checkClosed().getConnectionMutex()) {
-            java.sql.ResultSet paramTypesRs = null;
+            ResultSet paramTypesRs = null;
 
             try {
                 //Bug#57022, we need to check for db.SPname notation first and pass on only SPname
@@ -829,7 +829,7 @@ public class CallableStatement extends ClientPreparedStatement implements java.s
         }
     }
 
-    private void convertGetProcedureColumnsToInternalDescriptors(java.sql.ResultSet paramTypesRs) throws SQLException {
+    private void convertGetProcedureColumnsToInternalDescriptors(ResultSet paramTypesRs) throws SQLException {
         synchronized (checkClosed().getConnectionMutex()) {
             this.paramInfo = new CallableStatementParamInfo(paramTypesRs);
         }
@@ -879,12 +879,12 @@ public class CallableStatement extends ClientPreparedStatement implements java.s
     }
 
     @Override
-    public java.sql.ResultSet executeQuery() throws SQLException {
+    public ResultSet executeQuery() throws SQLException {
         synchronized (checkClosed().getConnectionMutex()) {
 
             checkStreamability();
 
-            java.sql.ResultSet execResults = null;
+            ResultSet execResults = null;
 
             setInOutParamsOnServer();
             setOutParams();
@@ -1879,7 +1879,7 @@ public class CallableStatement extends ClientPreparedStatement implements java.s
                 if (hadOutputParams) {
                     // We can't use 'ourself' to execute this query, or any pending result sets would be overwritten
                     java.sql.Statement outParameterStmt = null;
-                    java.sql.ResultSet outParamRs = null;
+                    ResultSet outParamRs = null;
 
                     try {
                         outParameterStmt = this.connection.createStatement();

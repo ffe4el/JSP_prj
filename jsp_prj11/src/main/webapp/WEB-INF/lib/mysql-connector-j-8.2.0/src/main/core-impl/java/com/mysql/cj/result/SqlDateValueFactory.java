@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.result;
+package jsp_prj11.src.main.webapp.WEB;
 
 import java.sql.Date;
 import java.util.Calendar;
@@ -46,7 +46,7 @@ import com.mysql.cj.protocol.InternalTimestamp;
 import com.mysql.cj.util.TimeUtil;
 
 /**
- * A value factory for creating {@link java.sql.Date} values.
+ * A value factory for creating {@link Date} values.
  */
 public class SqlDateValueFactory extends AbstractDateTimeValueFactory<Date> {
 

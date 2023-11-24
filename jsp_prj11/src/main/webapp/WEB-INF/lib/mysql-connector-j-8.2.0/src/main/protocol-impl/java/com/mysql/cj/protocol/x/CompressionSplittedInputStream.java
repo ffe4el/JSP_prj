@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.protocol.x;
+package jsp_prj11.src.main.webapp.WEB;
 
 import static com.mysql.cj.protocol.x.XMessageHeader.HEADER_LENGTH;
 
@@ -211,7 +211,7 @@ public class CompressionSplittedInputStream extends FilterInputStream {
      * Checks if current X Protocol frame is compressed.
      *
      * @return
-     *         <code>true</code> if the type of current frame is {@link com.mysql.cj.x.protobuf.Mysqlx.ServerMessages.Type#COMPRESSION}, <code>false</code>
+     *         <code>true</code> if the type of current frame is {@link ServerMessages.Type#COMPRESSION}, <code>false</code>
      *         otherwise.
      */
     private boolean isCompressedFrame() {

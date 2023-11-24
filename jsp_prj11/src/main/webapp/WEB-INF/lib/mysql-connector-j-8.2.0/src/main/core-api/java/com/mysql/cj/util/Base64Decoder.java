@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.util;
+package jsp_prj11.src.main.webapp.WEB;
 
 /**
  * This decoder implements standard Base64 decoding except it allows and silently ignores non-base64 input characters (spaces, line breaks etc)
@@ -67,7 +67,7 @@ public class Base64Decoder {
     }
 
     public static byte[] decode(byte[] in, int pos, int length) {
-        IntWrapper offset = new Base64Decoder.IntWrapper(pos);
+        IntWrapper offset = new IntWrapper(pos);
         byte[] sestet = new byte[4];
 
         int outLen = length * 3 / 4; // over-estimated if non-base64 characters present

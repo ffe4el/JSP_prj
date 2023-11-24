@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.result;
+package jsp_prj11.src.main.webapp.WEB;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -36,7 +36,7 @@ import java.nio.ByteBuffer;
 import com.mysql.cj.conf.PropertySet;
 
 /**
- * A value factory for creating {@link java.math.BigDecimal} values.
+ * A value factory for creating {@link BigDecimal} values.
  */
 public class BigDecimalValueFactory extends AbstractNumericValueFactory<BigDecimal> {
 

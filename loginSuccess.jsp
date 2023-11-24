@@ -14,21 +14,29 @@ Home > 관리자 로그인
     String u_pw = request.getParameter("uPW");
 
     if (u_id.equals("space") && u_pw.equals("123456")) {
-        session.setA
+        session.setAttribute("memberId", u_id);
+        session.setAttribute("memberPw", u_pw);
+
+        out.println("새로운 세션 생성 성공 ! <br>");
+        out.println("관리자 [" + u_id +"]님이 입장하였습니다. <p>");
+
+    }else{
+        response.sendRedirect("loginErr.jsp");
     }
-
-    String sql = "INSERT INTO members (id, passwd, email) VALUES";
-    sql += "(`" + u_id +"`,`"+u_pw +"`,`"+u_mail + "`)";
-
-    Statement sm = conn.createStatement();
-
-    int count = sm.executeUpdate(sql);
-    if (count == 1) {
-        response.sendRediret("signupSuccess.jsp");
-    }
-    sm.close();
-    conn.close();
 %>
-
+<table border="0">
+    <tr>
+        <td>
+            <form action="membership.jsp" method="post">
+                <input type="submit" value="◀ 등록 회원 관리하기 ">
+            </form>
+        </td>
+        <td>
+            <form action="logout.jsp" method="post">
+                <input type="submit" value=" 로그 아웃 ▶">
+            </form>
+        </td>
+    </tr>
+</table>
 </body>
 </html>

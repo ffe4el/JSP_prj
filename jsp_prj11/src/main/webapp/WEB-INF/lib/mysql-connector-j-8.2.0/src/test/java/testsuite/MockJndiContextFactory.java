@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package testsuite;
+package jsp_prj11.src.main.webapp.WEB;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package testsuite.regression;
+package jsp_prj11.src.main.webapp.WEB;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -319,7 +319,7 @@ public class ResultSetRegressionTest extends BaseTestCase {
             Statement streamStmt = null;
 
             try {
-                streamStmt = clobberConn.createStatement(java.sql.ResultSet.TYPE_FORWARD_ONLY, java.sql.ResultSet.CONCUR_READ_ONLY);
+                streamStmt = clobberConn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
                 streamStmt.setFetchSize(Integer.MIN_VALUE);
 
                 this.rs = streamStmt.executeQuery("SELECT DUMMYID, DUMMYNAME FROM StreamingClobber ORDER BY DUMMYID");
@@ -545,8 +545,8 @@ public class ResultSetRegressionTest extends BaseTestCase {
         PreparedStatement streamStmt = null;
 
         try {
-            streamStmt = this.conn.prepareStatement("SELECT DUMMYID, DUMMYNAME FROM StreamingRegBug ORDER BY DUMMYID", java.sql.ResultSet.TYPE_FORWARD_ONLY,
-                    java.sql.ResultSet.CONCUR_READ_ONLY);
+            streamStmt = this.conn.prepareStatement("SELECT DUMMYID, DUMMYNAME FROM StreamingRegBug ORDER BY DUMMYID", ResultSet.TYPE_FORWARD_ONLY,
+                    ResultSet.CONCUR_READ_ONLY);
             streamStmt.setFetchSize(Integer.MIN_VALUE);
 
             this.rs = streamStmt.executeQuery();
@@ -1207,7 +1207,7 @@ public class ResultSetRegressionTest extends BaseTestCase {
         cal.clear();
         cal.set(2005, 00, 05, 13, 59, 20);
 
-        Timestamp jan5before2pm = new java.sql.Timestamp(cal.getTimeInMillis());
+        Timestamp jan5before2pm = new Timestamp(cal.getTimeInMillis());
 
         this.pstmt.setTimestamp(2, jan5before2pm);
         this.rs = this.pstmt.executeQuery();
@@ -2916,7 +2916,7 @@ public class ResultSetRegressionTest extends BaseTestCase {
         byte[] bytearr = new byte[8];
 
         this.pstmt = this.conn.prepareStatement("INSERT INTO testBug25382 VALUES(?)");
-        this.pstmt.setObject(1, bytearr, java.sql.Types.BINARY);
+        this.pstmt.setObject(1, bytearr, Types.BINARY);
         assertEquals(1, this.pstmt.executeUpdate());
         this.pstmt.clearParameters();
 
@@ -3152,7 +3152,7 @@ public class ResultSetRegressionTest extends BaseTestCase {
                         + "int_type INT DEFAULT 1, intU_type INT UNSIGNED DEFAULT 1, bigInt_type BIGINT DEFAULT 1, bigIntU_type BIGINT UNSIGNED DEFAULT 1);");
         this.stmt.executeUpdate("INSERT INTO bug25894 VALUES (-1,1,-1,1,-1,1,-1,1,-1,1)");
         this.rs = this.stmt.executeQuery("SELECT * FROM bug25894");
-        java.sql.ResultSetMetaData tblMD = this.rs.getMetaData();
+        ResultSetMetaData tblMD = this.rs.getMetaData();
         this.rs.first();
         for (int i = 1; i < tblMD.getColumnCount() + 1; i++) {
             String typesName = "";
@@ -6700,7 +6700,7 @@ public class ResultSetRegressionTest extends BaseTestCase {
 
             st1.execute("truncate table testBug72609");
 
-            java.sql.Date d1 = new java.sql.Date(prolepticGc.getTime().getTime());
+            Date d1 = new Date(prolepticGc.getTime().getTime());
             Timestamp ts1 = new Timestamp(prolepticGc.getTime().getTime());
 
             this.pstmt = c1.prepareStatement("insert into testBug72609 values(?,?,?,?)");
@@ -7217,7 +7217,7 @@ public class ResultSetRegressionTest extends BaseTestCase {
                         this.rs.close();
 
                         ps = con.prepareStatement("update testBug20913289 set c1=c1+?,c2=? ");
-                        ps.setObject(1, "100", java.sql.Types.INTEGER);
+                        ps.setObject(1, "100", Types.INTEGER);
                         ps.setBlob(2, bval1);
                         ps.executeUpdate();
 

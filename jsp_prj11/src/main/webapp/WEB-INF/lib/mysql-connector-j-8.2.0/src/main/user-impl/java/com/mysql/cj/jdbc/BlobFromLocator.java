@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.jdbc;
+package jsp_prj11.src.main.webapp.WEB;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -167,7 +167,7 @@ public class BlobFromLocator implements java.sql.Blob {
     }
 
     @Override
-    public java.io.InputStream getBinaryStream() throws SQLException {
+    public InputStream getBinaryStream() throws SQLException {
         // TODO: Make fetch size configurable
         return new BufferedInputStream(new LocatorInputStream(),
                 this.creatorResultSet.getSession().getPropertySet().getMemorySizeProperty(PropertyKey.locatorFetchBufferSize).getValue());

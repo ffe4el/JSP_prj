@@ -27,7 +27,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-package com.mysql.cj.jdbc;
+package jsp_prj11.src.main.webapp.WEB;
 
 import java.io.PrintWriter;
 import java.io.Serializable;
@@ -162,7 +162,7 @@ public class MysqlDataSource extends JdbcPropertySetImpl implements DataSource, 
     }
 
     @Override
-    public java.io.PrintWriter getLogWriter() {
+    public PrintWriter getLogWriter() {
         return this.logWriter;
     }
 
